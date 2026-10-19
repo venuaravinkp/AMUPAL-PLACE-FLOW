@@ -71,7 +71,7 @@ export const evaluateAnswer = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<AnswerFeedback> => {
     const sys = `You are a supportive but honest placement-training coach for Indian college students. Evaluate the student's ${data.kind === "interview" ? "mock-interview" : "communication"} answer. Return JSON: {"clarity":0-10,"confidence":0-10,"grammar":0-10,"structure":0-10,"overall":0-10,"summary":"2-3 sentences","improvements":["3-4 concrete, specific tips"]}. Score fairly: short, off-topic or copied answers score low.`;
     const user = `Question: ${data.question}\n\nReference strong answer (for your calibration only): ${data.modelAnswer ?? "n/a"}\n\nStudent answer:\n${data.answer}`;
-    const r = await callAI(sys, user);
+    const r = await callAI(sys, user, "feedback", FEEDBACK_SCHEMA);
     const n = (x: unknown) => Math.max(0, Math.min(10, Math.round(Number(x) || 0)));
     return { clarity: n(r.clarity), confidence: n(r.confidence), grammar: n(r.grammar), structure: n(r.structure), overall: n(r.overall), summary: String(r.summary ?? ""), improvements: Array.isArray(r.improvements) ? r.improvements.map(String).slice(0, 5) : [] };
   });
@@ -87,6 +87,6 @@ export const judgeCode = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<JudgeResult> => {
     const sys = `You are a strict code judge. Mentally compile and execute the student's ${data.language} code exactly as written (do not fix bugs) against each test case by calling the required function with the given arguments. If it would not compile, set compiled=false and all passed=false. For SQL, judge whether the query correctly solves the problem; return a single result with input "query" and passed accordingly. Return JSON: {"compiled":bool,"results":[{"input":"...","expected":"...","actual":"...","passed":bool}],"feedback":"1-3 sentences"}.`;
     const user = `Problem:\n${data.prompt}\n\nTest cases (JSON): ${JSON.stringify(data.tests)}\n\nCode:\n${data.code}`;
-    const r = await callAI(sys, user);
+    const r = await callAI(sys, user, "judge", JUDGE_SCHEMA);
     return { compiled: !!r.compiled, results: Array.isArray(r.results) ? r.results.map((x: Record<string, unknown>) => ({ input: String(x.input), expected: String(x.expected), actual: String(x.actual), passed: !!x.passed })) : [], feedback: String(r.feedback ?? "") };
   });

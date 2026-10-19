@@ -36,7 +36,7 @@ function Comm() {
       </GlassCard>
       <div className="space-y-6">
         {groups.map((g) => {
-          const Icon = ICONS[g];
+          const Icon = ICONS[g] ?? MessageSquare;
           const items = (data ?? []).filter((q) => q.category === g);
           if (!items.length) return null;
           return (
