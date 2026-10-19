@@ -10,33 +10,259 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAptitudeRouteImport } from './routes/_authenticated/aptitude'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedInterviewRouteImport } from './routes/_authenticated/interview'
+import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
+import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
+import { Route as AuthenticatedCodingIdRouteImport } from './routes/_authenticated/coding.$id'
+import { Route as AuthenticatedCommunicationIndexRouteImport } from './routes/_authenticated/communication.index'
+import { Route as AuthenticatedCommunicationIdRouteImport } from './routes/_authenticated/communication.$id'
+import { Route as AuthenticatedCompaniesIndexRouteImport } from './routes/_authenticated/companies.index'
+import { Route as AuthenticatedCompaniesSlugRouteImport } from './routes/_authenticated/companies.$slug'
+import { Route as AuthenticatedResultsAttemptIdRouteImport } from './routes/_authenticated/results.$attemptId'
+import { Route as AuthenticatedTestAttemptIdRouteImport } from './routes/_authenticated/test.$attemptId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAptitudeRoute = AuthenticatedAptitudeRouteImport.update({
+  id: '/aptitude',
+  path: '/aptitude',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInterviewRoute = AuthenticatedInterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLeaderboardRoute =
+  AuthenticatedLeaderboardRouteImport.update({
+    id: '/leaderboard',
+    path: '/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTestsRoute = AuthenticatedTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCodingIndexRoute =
+  AuthenticatedCodingIndexRouteImport.update({
+    id: '/coding/',
+    path: '/coding/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCodingIdRoute = AuthenticatedCodingIdRouteImport.update({
+  id: '/coding/$id',
+  path: '/coding/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCommunicationIndexRoute =
+  AuthenticatedCommunicationIndexRouteImport.update({
+    id: '/communication/',
+    path: '/communication/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCommunicationIdRoute =
+  AuthenticatedCommunicationIdRouteImport.update({
+    id: '/communication/$id',
+    path: '/communication/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCompaniesIndexRoute =
+  AuthenticatedCompaniesIndexRouteImport.update({
+    id: '/companies/',
+    path: '/companies/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCompaniesSlugRoute =
+  AuthenticatedCompaniesSlugRouteImport.update({
+    id: '/companies/$slug',
+    path: '/companies/$slug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResultsAttemptIdRoute =
+  AuthenticatedResultsAttemptIdRouteImport.update({
+    id: '/results/$attemptId',
+    path: '/results/$attemptId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTestAttemptIdRoute =
+  AuthenticatedTestAttemptIdRouteImport.update({
+    id: '/test/$attemptId',
+    path: '/test/$attemptId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/interview': typeof AuthenticatedInterviewRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/tests': typeof AuthenticatedTestsRoute
+  '/coding/$id': typeof AuthenticatedCodingIdRoute
+  '/communication/$id': typeof AuthenticatedCommunicationIdRoute
+  '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
+  '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/coding/': typeof AuthenticatedCodingIndexRoute
+  '/communication/': typeof AuthenticatedCommunicationIndexRoute
+  '/companies/': typeof AuthenticatedCompaniesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/interview': typeof AuthenticatedInterviewRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/tests': typeof AuthenticatedTestsRoute
+  '/coding/$id': typeof AuthenticatedCodingIdRoute
+  '/communication/$id': typeof AuthenticatedCommunicationIdRoute
+  '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
+  '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/coding': typeof AuthenticatedCodingIndexRoute
+  '/communication': typeof AuthenticatedCommunicationIndexRoute
+  '/companies': typeof AuthenticatedCompaniesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/aptitude': typeof AuthenticatedAptitudeRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/interview': typeof AuthenticatedInterviewRoute
+  '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/tests': typeof AuthenticatedTestsRoute
+  '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
+  '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
+  '/_authenticated/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/_authenticated/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
+  '/_authenticated/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/_authenticated/coding/': typeof AuthenticatedCodingIndexRoute
+  '/_authenticated/communication/': typeof AuthenticatedCommunicationIndexRoute
+  '/_authenticated/companies/': typeof AuthenticatedCompaniesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/admin'
+    | '/aptitude'
+    | '/dashboard'
+    | '/interview'
+    | '/leaderboard'
+    | '/onboarding'
+    | '/tests'
+    | '/coding/$id'
+    | '/communication/$id'
+    | '/companies/$slug'
+    | '/results/$attemptId'
+    | '/test/$attemptId'
+    | '/coding/'
+    | '/communication/'
+    | '/companies/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/admin'
+    | '/aptitude'
+    | '/dashboard'
+    | '/interview'
+    | '/leaderboard'
+    | '/onboarding'
+    | '/tests'
+    | '/coding/$id'
+    | '/communication/$id'
+    | '/companies/$slug'
+    | '/results/$attemptId'
+    | '/test/$attemptId'
+    | '/coding'
+    | '/communication'
+    | '/companies'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/admin'
+    | '/_authenticated/aptitude'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/interview'
+    | '/_authenticated/leaderboard'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/tests'
+    | '/_authenticated/coding/$id'
+    | '/_authenticated/communication/$id'
+    | '/_authenticated/companies/$slug'
+    | '/_authenticated/results/$attemptId'
+    | '/_authenticated/test/$attemptId'
+    | '/_authenticated/coding/'
+    | '/_authenticated/communication/'
+    | '/_authenticated/companies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +274,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/aptitude': {
+      id: '/_authenticated/aptitude'
+      path: '/aptitude'
+      fullPath: '/aptitude'
+      preLoaderRoute: typeof AuthenticatedAptitudeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/interview': {
+      id: '/_authenticated/interview'
+      path: '/interview'
+      fullPath: '/interview'
+      preLoaderRoute: typeof AuthenticatedInterviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/leaderboard': {
+      id: '/_authenticated/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AuthenticatedLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tests': {
+      id: '/_authenticated/tests'
+      path: '/tests'
+      fullPath: '/tests'
+      preLoaderRoute: typeof AuthenticatedTestsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/coding/': {
+      id: '/_authenticated/coding/'
+      path: '/coding'
+      fullPath: '/coding/'
+      preLoaderRoute: typeof AuthenticatedCodingIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/coding/$id': {
+      id: '/_authenticated/coding/$id'
+      path: '/coding/$id'
+      fullPath: '/coding/$id'
+      preLoaderRoute: typeof AuthenticatedCodingIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/communication/': {
+      id: '/_authenticated/communication/'
+      path: '/communication'
+      fullPath: '/communication/'
+      preLoaderRoute: typeof AuthenticatedCommunicationIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/communication/$id': {
+      id: '/_authenticated/communication/$id'
+      path: '/communication/$id'
+      fullPath: '/communication/$id'
+      preLoaderRoute: typeof AuthenticatedCommunicationIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/companies/': {
+      id: '/_authenticated/companies/'
+      path: '/companies'
+      fullPath: '/companies/'
+      preLoaderRoute: typeof AuthenticatedCompaniesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/companies/$slug': {
+      id: '/_authenticated/companies/$slug'
+      path: '/companies/$slug'
+      fullPath: '/companies/$slug'
+      preLoaderRoute: typeof AuthenticatedCompaniesSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/results/$attemptId': {
+      id: '/_authenticated/results/$attemptId'
+      path: '/results/$attemptId'
+      fullPath: '/results/$attemptId'
+      preLoaderRoute: typeof AuthenticatedResultsAttemptIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/test/$attemptId': {
+      id: '/_authenticated/test/$attemptId'
+      path: '/test/$attemptId'
+      fullPath: '/test/$attemptId'
+      preLoaderRoute: typeof AuthenticatedTestAttemptIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAptitudeRoute: typeof AuthenticatedAptitudeRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedInterviewRoute: typeof AuthenticatedInterviewRoute
+  AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
+  AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
+  AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
+  AuthenticatedCompaniesSlugRoute: typeof AuthenticatedCompaniesSlugRoute
+  AuthenticatedResultsAttemptIdRoute: typeof AuthenticatedResultsAttemptIdRoute
+  AuthenticatedTestAttemptIdRoute: typeof AuthenticatedTestAttemptIdRoute
+  AuthenticatedCodingIndexRoute: typeof AuthenticatedCodingIndexRoute
+  AuthenticatedCommunicationIndexRoute: typeof AuthenticatedCommunicationIndexRoute
+  AuthenticatedCompaniesIndexRoute: typeof AuthenticatedCompaniesIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAptitudeRoute: AuthenticatedAptitudeRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedInterviewRoute: AuthenticatedInterviewRoute,
+  AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedTestsRoute: AuthenticatedTestsRoute,
+  AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
+  AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
+  AuthenticatedCompaniesSlugRoute: AuthenticatedCompaniesSlugRoute,
+  AuthenticatedResultsAttemptIdRoute: AuthenticatedResultsAttemptIdRoute,
+  AuthenticatedTestAttemptIdRoute: AuthenticatedTestAttemptIdRoute,
+  AuthenticatedCodingIndexRoute: AuthenticatedCodingIndexRoute,
+  AuthenticatedCommunicationIndexRoute: AuthenticatedCommunicationIndexRoute,
+  AuthenticatedCompaniesIndexRoute: AuthenticatedCompaniesIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
