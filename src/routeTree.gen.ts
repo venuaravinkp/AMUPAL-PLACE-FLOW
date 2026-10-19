@@ -16,6 +16,8 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAptitudeRouteImport } from './routes/_authenticated/aptitude'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
+import { Route as AuthenticatedCodingIdRouteImport } from './routes/_authenticated/coding.$id'
 import { Route as AuthenticatedResultsAttemptIdRouteImport } from './routes/_authenticated/results.$attemptId'
 import { Route as AuthenticatedTestAttemptIdRouteImport } from './routes/_authenticated/test.$attemptId'
 
@@ -53,6 +55,17 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCodingIndexRoute =
+  AuthenticatedCodingIndexRouteImport.update({
+    id: '/coding/',
+    path: '/coding/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCodingIdRoute = AuthenticatedCodingIdRouteImport.update({
+  id: '/coding/$id',
+  path: '/coding/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedResultsAttemptIdRoute =
   AuthenticatedResultsAttemptIdRouteImport.update({
     id: '/results/$attemptId',
@@ -73,8 +86,10 @@ export interface FileRoutesByFullPath {
   '/aptitude': typeof AuthenticatedAptitudeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/coding/': typeof AuthenticatedCodingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,8 +98,10 @@ export interface FileRoutesByTo {
   '/aptitude': typeof AuthenticatedAptitudeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/coding': typeof AuthenticatedCodingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,8 +112,10 @@ export interface FileRoutesById {
   '/_authenticated/aptitude': typeof AuthenticatedAptitudeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/_authenticated/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
+  '/_authenticated/coding/': typeof AuthenticatedCodingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,8 +126,10 @@ export interface FileRouteTypes {
     | '/aptitude'
     | '/dashboard'
     | '/onboarding'
+    | '/coding/$id'
     | '/results/$attemptId'
     | '/test/$attemptId'
+    | '/coding/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,8 +138,10 @@ export interface FileRouteTypes {
     | '/aptitude'
     | '/dashboard'
     | '/onboarding'
+    | '/coding/$id'
     | '/results/$attemptId'
     | '/test/$attemptId'
+    | '/coding'
   id:
     | '__root__'
     | '/'
@@ -128,8 +151,10 @@ export interface FileRouteTypes {
     | '/_authenticated/aptitude'
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
+    | '/_authenticated/coding/$id'
     | '/_authenticated/results/$attemptId'
     | '/_authenticated/test/$attemptId'
+    | '/_authenticated/coding/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -190,6 +215,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/coding/': {
+      id: '/_authenticated/coding/'
+      path: '/coding'
+      fullPath: '/coding/'
+      preLoaderRoute: typeof AuthenticatedCodingIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/coding/$id': {
+      id: '/_authenticated/coding/$id'
+      path: '/coding/$id'
+      fullPath: '/coding/$id'
+      preLoaderRoute: typeof AuthenticatedCodingIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/results/$attemptId': {
       id: '/_authenticated/results/$attemptId'
       path: '/results/$attemptId'
@@ -211,16 +250,20 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAptitudeRoute: typeof AuthenticatedAptitudeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedResultsAttemptIdRoute: typeof AuthenticatedResultsAttemptIdRoute
   AuthenticatedTestAttemptIdRoute: typeof AuthenticatedTestAttemptIdRoute
+  AuthenticatedCodingIndexRoute: typeof AuthenticatedCodingIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAptitudeRoute: AuthenticatedAptitudeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedResultsAttemptIdRoute: AuthenticatedResultsAttemptIdRoute,
   AuthenticatedTestAttemptIdRoute: AuthenticatedTestAttemptIdRoute,
+  AuthenticatedCodingIndexRoute: AuthenticatedCodingIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
