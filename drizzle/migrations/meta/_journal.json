@@ -15,6 +15,13 @@
       "when": 1792477101443,
       "tag": "0001_lesson_progress",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792477228298,
+      "tag": "0002_profile_department_fields",
+      "breakpoints": true
     }
   ]
 }
