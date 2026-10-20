@@ -140,13 +140,18 @@ export type Database = {
         Row: {
           aptitude_level: string
           branch: string | null
+          career_interests: string[]
           coding_level: string
           college: string | null
           communication_level: string
           created_at: string
+          degree: string | null
+          department_group: string | null
           email: string | null
           full_name: string | null
           id: string
+          improvement_areas: string[]
+          learning_format: string | null
           onboarded: boolean
           points: number
           target_companies: string[]
@@ -156,13 +161,18 @@ export type Database = {
         Insert: {
           aptitude_level?: string
           branch?: string | null
+          career_interests?: string[]
           coding_level?: string
           college?: string | null
           communication_level?: string
           created_at?: string
+          degree?: string | null
+          department_group?: string | null
           email?: string | null
           full_name?: string | null
           id: string
+          improvement_areas?: string[]
+          learning_format?: string | null
           onboarded?: boolean
           points?: number
           target_companies?: string[]
@@ -172,13 +182,18 @@ export type Database = {
         Update: {
           aptitude_level?: string
           branch?: string | null
+          career_interests?: string[]
           coding_level?: string
           college?: string | null
           communication_level?: string
           created_at?: string
+          degree?: string | null
+          department_group?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
+          improvement_areas?: string[]
+          learning_format?: string | null
           onboarded?: boolean
           points?: number
           target_companies?: string[]
