@@ -103,6 +103,39 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_progress: {
+        Row: {
+          completed: boolean
+          id: string
+          lesson_slug: string
+          quiz_score: number | null
+          quiz_total: number | null
+          step: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          id?: string
+          lesson_slug: string
+          quiz_score?: number | null
+          quiz_total?: number | null
+          step?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          id?: string
+          lesson_slug?: string
+          quiz_score?: number | null
+          quiz_total?: number | null
+          step?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           aptitude_level: string
