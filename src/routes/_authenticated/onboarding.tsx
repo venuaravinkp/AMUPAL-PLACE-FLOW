@@ -19,6 +19,8 @@ export const Route = createFileRoute("/_authenticated/onboarding")({
 const COMPANIES = ["TCS", "Infosys", "Wipro", "Accenture", "Capgemini", "product"];
 const LEVELS = ["beginner", "intermediate", "advanced"];
 const GROUP_KEYS = Object.keys(DEPARTMENT_GROUPS);
+const ROLES = Array.from(new Set(GROUP_KEYS.flatMap((k) => DEPARTMENT_GROUPS[k].roles))).concat("Other");
+void [CAREER_INTERESTS, LEARNING_FORMATS, IMPROVEMENT_AREAS, DEGREES];
 
 function Chips({ options, value, onChange, multi }: { options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean }) {
   return (
