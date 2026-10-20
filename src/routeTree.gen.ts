@@ -26,6 +26,7 @@ import { Route as AuthenticatedCommunicationIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedCommunicationIdRouteImport } from './routes/_authenticated/communication.$id'
 import { Route as AuthenticatedCompaniesIndexRouteImport } from './routes/_authenticated/companies.index'
 import { Route as AuthenticatedCompaniesSlugRouteImport } from './routes/_authenticated/companies.$slug'
+import { Route as AuthenticatedLearnSlugRouteImport } from './routes/_authenticated/learn.$slug'
 import { Route as AuthenticatedResultsAttemptIdRouteImport } from './routes/_authenticated/results.$attemptId'
 import { Route as AuthenticatedTestAttemptIdRouteImport } from './routes/_authenticated/test.$attemptId'
 
@@ -119,6 +120,11 @@ const AuthenticatedCompaniesSlugRoute =
     path: '/companies/$slug',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLearnSlugRoute = AuthenticatedLearnSlugRouteImport.update({
+  id: '/learn/$slug',
+  path: '/learn/$slug',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedResultsAttemptIdRoute =
   AuthenticatedResultsAttemptIdRouteImport.update({
     id: '/results/$attemptId',
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding/': typeof AuthenticatedCodingIndexRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding': typeof AuthenticatedCodingIndexRoute
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/_authenticated/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/_authenticated/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/_authenticated/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/_authenticated/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/_authenticated/coding/': typeof AuthenticatedCodingIndexRoute
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/coding/$id'
     | '/communication/$id'
     | '/companies/$slug'
+    | '/learn/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding/'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/coding/$id'
     | '/communication/$id'
     | '/companies/$slug'
+    | '/learn/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding'
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/_authenticated/coding/$id'
     | '/_authenticated/communication/$id'
     | '/_authenticated/companies/$slug'
+    | '/_authenticated/learn/$slug'
     | '/_authenticated/results/$attemptId'
     | '/_authenticated/test/$attemptId'
     | '/_authenticated/coding/'
@@ -386,6 +398,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCompaniesSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/learn/$slug': {
+      id: '/_authenticated/learn/$slug'
+      path: '/learn/$slug'
+      fullPath: '/learn/$slug'
+      preLoaderRoute: typeof AuthenticatedLearnSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/results/$attemptId': {
       id: '/_authenticated/results/$attemptId'
       path: '/results/$attemptId'
@@ -414,6 +433,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
   AuthenticatedCompaniesSlugRoute: typeof AuthenticatedCompaniesSlugRoute
+  AuthenticatedLearnSlugRoute: typeof AuthenticatedLearnSlugRoute
   AuthenticatedResultsAttemptIdRoute: typeof AuthenticatedResultsAttemptIdRoute
   AuthenticatedTestAttemptIdRoute: typeof AuthenticatedTestAttemptIdRoute
   AuthenticatedCodingIndexRoute: typeof AuthenticatedCodingIndexRoute
@@ -432,6 +452,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
   AuthenticatedCompaniesSlugRoute: AuthenticatedCompaniesSlugRoute,
+  AuthenticatedLearnSlugRoute: AuthenticatedLearnSlugRoute,
   AuthenticatedResultsAttemptIdRoute: AuthenticatedResultsAttemptIdRoute,
   AuthenticatedTestAttemptIdRoute: AuthenticatedTestAttemptIdRoute,
   AuthenticatedCodingIndexRoute: AuthenticatedCodingIndexRoute,
