@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { DEPARTMENT_GROUPS, CAREER_INTERESTS, LEARNING_FORMATS, IMPROVEMENT_AREAS, DEGREES } from "@/lib/paths";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({ meta: [{ title: "Set up your plan — AMUPAL PLACE FLOW" }, { name: "description", content: "Tell us about you to build your placement plan." }, { property: "og:title", content: "Onboarding — AMUPAL PLACE FLOW" }, { property: "og:description", content: "Build your personalised placement plan." }] }),
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/_authenticated/onboarding")({
 
 const COMPANIES = ["TCS", "Infosys", "Wipro", "Accenture", "Capgemini", "product"];
 const LEVELS = ["beginner", "intermediate", "advanced"];
-const ROLES = ["Software Engineer", "Data Analyst", "Full-stack Developer", "QA / Test Engineer", "Business Analyst", "Other"];
+const GROUP_KEYS = Object.keys(DEPARTMENT_GROUPS);
 
 function Chips({ options, value, onChange, multi }: { options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean }) {
   return (
