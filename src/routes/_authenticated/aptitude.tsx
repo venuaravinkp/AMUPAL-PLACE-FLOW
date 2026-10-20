@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -55,6 +55,11 @@ function Aptitude() {
         <div className="solid-panel p-6 lg:col-span-1">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold"><BookOpen className="h-5 w-5 text-primary" />Lesson: {LESSONS[cat].title}</h2>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">{LESSONS[cat].points.map((p) => <li key={p}>{p}</li>)}</ul>
+          {cat === "quant" && (
+            <Link to="/learn/$slug" params={{ slug: "percentages" }} className="mt-4 block rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">
+              Full lesson: Percentages → learn, examples, hints & quiz
+            </Link>
+          )}
           <div className="mt-6">
             <div className="mb-2 text-sm font-semibold">Difficulty</div>
             <div className="flex flex-wrap gap-2">
