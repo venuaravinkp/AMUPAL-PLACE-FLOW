@@ -19,6 +19,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedInterviewRouteImport } from './routes/_authenticated/interview'
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
 import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
 import { Route as AuthenticatedCodingIdRouteImport } from './routes/_authenticated/coding.$id'
@@ -78,6 +79,11 @@ const AuthenticatedLeaderboardRoute =
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTeacherRoute = AuthenticatedTeacherRouteImport.update({
+  id: '/teacher',
+  path: '/teacher',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTestsRoute = AuthenticatedTestsRouteImport.update({
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/interview': typeof AuthenticatedInterviewRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -169,6 +176,7 @@ export interface FileRoutesByTo {
   '/interview': typeof AuthenticatedInterviewRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/_authenticated/interview': typeof AuthenticatedInterviewRoute
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tests': typeof AuthenticatedTestsRoute
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -215,6 +224,7 @@ export interface FileRouteTypes {
     | '/interview'
     | '/leaderboard'
     | '/onboarding'
+    | '/teacher'
     | '/tests'
     | '/coding/$id'
     | '/communication/$id'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/interview'
     | '/leaderboard'
     | '/onboarding'
+    | '/teacher'
     | '/tests'
     | '/coding/$id'
     | '/communication/$id'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/_authenticated/interview'
     | '/_authenticated/leaderboard'
     | '/_authenticated/onboarding'
+    | '/_authenticated/teacher'
     | '/_authenticated/tests'
     | '/_authenticated/coding/$id'
     | '/_authenticated/communication/$id'
@@ -349,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/teacher': {
+      id: '/_authenticated/teacher'
+      path: '/teacher'
+      fullPath: '/teacher'
+      preLoaderRoute: typeof AuthenticatedTeacherRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tests': {
       id: '/_authenticated/tests'
       path: '/tests'
@@ -429,6 +448,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedInterviewRoute: typeof AuthenticatedInterviewRoute
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
@@ -448,6 +468,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedInterviewRoute: AuthenticatedInterviewRoute,
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTestsRoute: AuthenticatedTestsRoute,
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
