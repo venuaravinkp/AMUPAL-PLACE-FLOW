@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { MODES, buildTeacherSystem, LESSON_SCHEMA, parseIsoDuration, type ModeId, type TeachLesson } from "@/lib/teacher";
 
 const FEEDBACK_SCHEMA = {
   type: "object", additionalProperties: false,
@@ -89,4 +90,48 @@ export const judgeCode = createServerFn({ method: "POST" })
     const user = `Problem:\n${data.prompt}\n\nTest cases (JSON): ${JSON.stringify(data.tests)}\n\nCode:\n${data.code}`;
     const r = await callAI(sys, user, "judge", JUDGE_SCHEMA);
     return { compiled: !!r.compiled, results: Array.isArray(r.results) ? r.results.map((x: Record<string, unknown>) => ({ input: String(x.input), expected: String(x.expected), actual: String(x.actual), passed: !!x.passed })) : [], feedback: String(r.feedback ?? "") };
+  });
+
+export const teachTopic = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: { topic: string; mode: ModeId; followUp?: string | null; previous?: string | null }) => {
+    if (!i.topic?.trim() || i.topic.length > 1000) throw new Error("Topic must be 1–1000 characters");
+    if (!MODES.some((m) => m.id === i.mode)) throw new Error("Unknown mode");
+    if (i.followUp && i.followUp.length > 1000) throw new Error("Follow-up too long");
+    return i;
+  })
+  .handler(async ({ data }): Promise<TeachLesson> => {
+    const sys = buildTeacherSystem(data.mode, data.previous);
+    const user = data.followUp
+      ? `Lesson topic: ${data.topic}\nPrevious lesson summary: ${(data.previous ?? "").slice(0, 2000)}\nStudent follow-up question: ${data.followUp}\nAnswer the follow-up as a full lesson that stays within this topic.`
+      : `Teach me: ${data.topic}`;
+    const r = (await callAI(sys, user, "lesson", LESSON_SCHEMA)) as TeachLesson;
+    r.practice = (r.practice ?? []).filter((p) => Array.isArray(p.options) && p.answer >= 0 && p.answer < p.options.length);
+    return r;
+  });
+
+export type Video = { id: string; title: string; channel: string; duration: string; description: string; language: string };
+
+export const findVideos = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: { query: string }) => ({ query: String(i.query ?? "").slice(0, 200) }))
+  .handler(async ({ data }): Promise<{ configured: boolean; videos: Video[]; error?: string }> => {
+    const key = process.env["YOUTUBE_API_KEY"];
+    if (!key) return { configured: false, videos: [] };
+    try {
+      const q = encodeURIComponent(`${data.query} tutorial for beginners`);
+      const s = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&safeSearch=strict&maxResults=6&relevanceLanguage=en&q=${q}&key=${key}`);
+      if (!s.ok) return { configured: true, videos: [], error: "Video search is unavailable right now." };
+      const sj = await s.json() as { items?: { id: { videoId: string } }[] };
+      const ids = (sj.items ?? []).map((x) => x.id.videoId).filter(Boolean);
+      if (!ids.length) return { configured: true, videos: [] };
+      const d = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,status&id=${ids.join(",")}&key=${key}`);
+      const dj = await d.json() as { items?: { id: string; snippet: { title: string; channelTitle: string; description: string; defaultAudioLanguage?: string }; contentDetails: { duration: string }; status: { embeddable: boolean } }[] };
+      return { configured: true, videos: (dj.items ?? []).filter((v) => v.status.embeddable).map((v) => ({
+        id: v.id, title: v.snippet.title, channel: v.snippet.channelTitle, duration: parseIsoDuration(v.contentDetails.duration),
+        description: v.snippet.description.slice(0, 160), language: v.snippet.defaultAudioLanguage ?? "",
+      })) };
+    } catch {
+      return { configured: true, videos: [], error: "Video search failed." };
+    }
   });
