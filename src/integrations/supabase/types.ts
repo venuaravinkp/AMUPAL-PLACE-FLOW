@@ -73,6 +73,80 @@ export type Database = {
           },
         ]
       }
+      companies: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          name: string
+          region: string
+          short_description: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          name: string
+          region?: string
+          short_description?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          name?: string
+          region?: string
+          short_description?: string | null
+        }
+        Relationships: []
+      }
+      company_questions: {
+        Row: {
+          answer: string | null
+          company_id: string
+          created_at: string
+          difficulty: string
+          explanation: string | null
+          id: string
+          question: string
+          round_type: string
+          tips: string | null
+          topic: string | null
+        }
+        Insert: {
+          answer?: string | null
+          company_id: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string | null
+          id?: string
+          question: string
+          round_type: string
+          tips?: string | null
+          topic?: string | null
+        }
+        Update: {
+          answer?: string | null
+          company_id?: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string | null
+          id?: string
+          question?: string
+          round_type?: string
+          tips?: string | null
+          topic?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_questions_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       company_tracks: {
         Row: {
           description: string | null
@@ -509,6 +583,38 @@ export type Database = {
           title?: string
         }
         Relationships: []
+      }
+      user_question_status: {
+        Row: {
+          bookmarked: boolean
+          practised: boolean
+          question_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bookmarked?: boolean
+          practised?: boolean
+          question_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bookmarked?: boolean
+          practised?: boolean
+          question_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_question_status_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "company_questions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
