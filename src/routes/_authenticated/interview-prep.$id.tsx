@@ -39,7 +39,9 @@ function CompanyPage() {
   async function toggle(qid: string, field: "bookmarked" | "practised") {
     const { data: u } = await supabase.auth.getUser();
     const cur = st.get(qid);
-    const row = { user_id: u.user!.id, question_id: qid, bookmarked: cur?.bookmarked ?? false, practised: cur?.practised ?? false, [field]: !(cur?.[field] ?? false) };
+    const bookmarked = field === "bookmarked" ? !(cur?.bookmarked ?? false) : (cur?.bookmarked ?? false);
+    const practised = field === "practised" ? !(cur?.practised ?? false) : (cur?.practised ?? false);
+    const row = { user_id: u.user!.id, question_id: qid, bookmarked, practised };
     const { error } = await supabase.from("user_question_status").upsert(row);
     if (error) return toast.error(error.message);
     qc.invalidateQueries({ queryKey: ["prep-status"] });

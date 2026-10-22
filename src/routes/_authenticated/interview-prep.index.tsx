@@ -28,7 +28,6 @@ function Page() {
   return (
     <div>
       <PageHeader title="Top Companies Interview Prep" subtitle="Aptitude, technical and HR practice questions by company." />
-      {me?.isStaff && <Link to="/interview-prep-admin" className="mb-4 inline-block text-sm font-semibold text-primary">Manage companies & questions →</Link>}
       <div className="mb-5 space-y-3">
         <div className="relative max-w-md"><Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" /><Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search companies" className="pl-9" /></div>
         <div className="flex flex-wrap gap-2">{["All", "India", "Global"].map((r) => <button key={r} className={pill(region === r)} onClick={() => setRegion(r)}>{r}</button>)}</div>
