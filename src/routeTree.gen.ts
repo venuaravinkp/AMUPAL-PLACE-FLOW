@@ -27,6 +27,8 @@ import { Route as AuthenticatedCommunicationIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedCommunicationIdRouteImport } from './routes/_authenticated/communication.$id'
 import { Route as AuthenticatedCompaniesIndexRouteImport } from './routes/_authenticated/companies.index'
 import { Route as AuthenticatedCompaniesSlugRouteImport } from './routes/_authenticated/companies.$slug'
+import { Route as AuthenticatedInterviewPrepIndexRouteImport } from './routes/_authenticated/interview-prep.index'
+import { Route as AuthenticatedInterviewPrepIdRouteImport } from './routes/_authenticated/interview-prep.$id'
 import { Route as AuthenticatedLearnSlugRouteImport } from './routes/_authenticated/learn.$slug'
 import { Route as AuthenticatedResultsAttemptIdRouteImport } from './routes/_authenticated/results.$attemptId'
 import { Route as AuthenticatedTestAttemptIdRouteImport } from './routes/_authenticated/test.$attemptId'
@@ -126,6 +128,18 @@ const AuthenticatedCompaniesSlugRoute =
     path: '/companies/$slug',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedInterviewPrepIndexRoute =
+  AuthenticatedInterviewPrepIndexRouteImport.update({
+    id: '/interview-prep/',
+    path: '/interview-prep/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedInterviewPrepIdRoute =
+  AuthenticatedInterviewPrepIdRouteImport.update({
+    id: '/interview-prep/$id',
+    path: '/interview-prep/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLearnSlugRoute = AuthenticatedLearnSlugRouteImport.update({
   id: '/learn/$slug',
   path: '/learn/$slug',
@@ -159,12 +173,14 @@ export interface FileRoutesByFullPath {
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding/': typeof AuthenticatedCodingIndexRoute
   '/communication/': typeof AuthenticatedCommunicationIndexRoute
   '/companies/': typeof AuthenticatedCompaniesIndexRoute
+  '/interview-prep/': typeof AuthenticatedInterviewPrepIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -181,12 +197,14 @@ export interface FileRoutesByTo {
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding': typeof AuthenticatedCodingIndexRoute
   '/communication': typeof AuthenticatedCommunicationIndexRoute
   '/companies': typeof AuthenticatedCompaniesIndexRoute
+  '/interview-prep': typeof AuthenticatedInterviewPrepIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,12 +223,14 @@ export interface FileRoutesById {
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/_authenticated/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
+  '/_authenticated/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/_authenticated/learn/$slug': typeof AuthenticatedLearnSlugRoute
   '/_authenticated/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/_authenticated/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/_authenticated/coding/': typeof AuthenticatedCodingIndexRoute
   '/_authenticated/communication/': typeof AuthenticatedCommunicationIndexRoute
   '/_authenticated/companies/': typeof AuthenticatedCompaniesIndexRoute
+  '/_authenticated/interview-prep/': typeof AuthenticatedInterviewPrepIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -229,12 +249,14 @@ export interface FileRouteTypes {
     | '/coding/$id'
     | '/communication/$id'
     | '/companies/$slug'
+    | '/interview-prep/$id'
     | '/learn/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding/'
     | '/communication/'
     | '/companies/'
+    | '/interview-prep/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -251,12 +273,14 @@ export interface FileRouteTypes {
     | '/coding/$id'
     | '/communication/$id'
     | '/companies/$slug'
+    | '/interview-prep/$id'
     | '/learn/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding'
     | '/communication'
     | '/companies'
+    | '/interview-prep'
   id:
     | '__root__'
     | '/'
@@ -274,12 +298,14 @@ export interface FileRouteTypes {
     | '/_authenticated/coding/$id'
     | '/_authenticated/communication/$id'
     | '/_authenticated/companies/$slug'
+    | '/_authenticated/interview-prep/$id'
     | '/_authenticated/learn/$slug'
     | '/_authenticated/results/$attemptId'
     | '/_authenticated/test/$attemptId'
     | '/_authenticated/coding/'
     | '/_authenticated/communication/'
     | '/_authenticated/companies/'
+    | '/_authenticated/interview-prep/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -417,6 +443,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCompaniesSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/interview-prep/': {
+      id: '/_authenticated/interview-prep/'
+      path: '/interview-prep'
+      fullPath: '/interview-prep/'
+      preLoaderRoute: typeof AuthenticatedInterviewPrepIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/interview-prep/$id': {
+      id: '/_authenticated/interview-prep/$id'
+      path: '/interview-prep/$id'
+      fullPath: '/interview-prep/$id'
+      preLoaderRoute: typeof AuthenticatedInterviewPrepIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/learn/$slug': {
       id: '/_authenticated/learn/$slug'
       path: '/learn/$slug'
@@ -453,12 +493,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
   AuthenticatedCompaniesSlugRoute: typeof AuthenticatedCompaniesSlugRoute
+  AuthenticatedInterviewPrepIdRoute: typeof AuthenticatedInterviewPrepIdRoute
   AuthenticatedLearnSlugRoute: typeof AuthenticatedLearnSlugRoute
   AuthenticatedResultsAttemptIdRoute: typeof AuthenticatedResultsAttemptIdRoute
   AuthenticatedTestAttemptIdRoute: typeof AuthenticatedTestAttemptIdRoute
   AuthenticatedCodingIndexRoute: typeof AuthenticatedCodingIndexRoute
   AuthenticatedCommunicationIndexRoute: typeof AuthenticatedCommunicationIndexRoute
   AuthenticatedCompaniesIndexRoute: typeof AuthenticatedCompaniesIndexRoute
+  AuthenticatedInterviewPrepIndexRoute: typeof AuthenticatedInterviewPrepIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -473,12 +515,14 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
   AuthenticatedCompaniesSlugRoute: AuthenticatedCompaniesSlugRoute,
+  AuthenticatedInterviewPrepIdRoute: AuthenticatedInterviewPrepIdRoute,
   AuthenticatedLearnSlugRoute: AuthenticatedLearnSlugRoute,
   AuthenticatedResultsAttemptIdRoute: AuthenticatedResultsAttemptIdRoute,
   AuthenticatedTestAttemptIdRoute: AuthenticatedTestAttemptIdRoute,
   AuthenticatedCodingIndexRoute: AuthenticatedCodingIndexRoute,
   AuthenticatedCommunicationIndexRoute: AuthenticatedCommunicationIndexRoute,
   AuthenticatedCompaniesIndexRoute: AuthenticatedCompaniesIndexRoute,
+  AuthenticatedInterviewPrepIndexRoute: AuthenticatedInterviewPrepIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
