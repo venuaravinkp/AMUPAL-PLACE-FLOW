@@ -2,13 +2,14 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase,
+  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/lib/data";
 
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/my-path", label: "My Path", icon: Route },
   { to: "/teacher", label: "AI Teacher", icon: GraduationCap },
   { to: "/aptitude", label: "Aptitude", icon: Calculator },
   { to: "/coding", label: "Coding", icon: Code2 },

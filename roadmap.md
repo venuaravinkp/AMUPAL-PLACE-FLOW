@@ -1,7 +1,7 @@
 # Master upgrade roadmap
 - [x] Stage 1 — Inspect existing app
 - [x] Stage 2 — Percentages lesson (intro → concepts → formulas → examples → guided practice → quiz, saved progress)
-- [ ] Stage 3 — All-department onboarding + learning paths
+- [x] Stage 3 — All-department onboarding + learning paths
 - [ ] Stage 4 (Interview Prep section done: student pages, admin + CSV upload, dashboard card) — More lessons, question review, company prep
 - [ ] Stage 5 — Resume coach, study planner, projects, resources
 - [x] Stage 6 — Smart AI Teacher (8 modes, follow-ups, practice) + video section
