@@ -115,6 +115,16 @@ function Dashboard() {
         </div>
       </GlassCard>
 
+      <Link to="/interview-prep">
+        <GlassCard hover className="flex items-center justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-bold">Top Companies Interview Prep</h3>
+            <p className="text-sm text-muted-foreground">Practise HR, technical and aptitude questions for TCS, Infosys, Google, Amazon and more.</p>
+          </div>
+          <Button size="sm" className="rounded-full">Open</Button>
+        </GlassCard>
+      </Link>
+
       <div className="grid gap-4 lg:grid-cols-3">
         <GlassCard>
           <h3 className="mb-4 text-lg font-bold">Skill progress</h3>
