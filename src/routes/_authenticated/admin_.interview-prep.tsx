@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { csvTemplate, validateCsv, type CsvResult, ROUNDS, DIFFS } from "@/lib/interviewPrep";
 
-export const Route = createFileRoute("/_authenticated/admin/interview-prep")({
+export const Route = createFileRoute("/_authenticated/admin_/interview-prep")({
   head: () => ({ meta: [{ title: "Manage Interview Prep — AMUPAL PLACE FLOW" }, { name: "description", content: "Add, edit and bulk-upload company interview questions." }, { property: "og:title", content: "Manage Interview Prep" }, { property: "og:description", content: "Admin tools for company interview questions." }] }),
   component: Page,
 });
