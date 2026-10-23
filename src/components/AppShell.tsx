@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap,
+  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/lib/data";
@@ -16,6 +16,7 @@ const NAV = [
   { to: "/interview", label: "Interview", icon: Mic },
   { to: "/tests", label: "Tests", icon: ClipboardList },
   { to: "/companies", label: "Companies", icon: Building2 },
+  { to: "/interview-prep", label: "Interview Prep", icon: Briefcase },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ] as const;
 
