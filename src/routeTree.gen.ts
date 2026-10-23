@@ -21,7 +21,7 @@ import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenti
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
-import { Route as AuthenticatedAdminInterviewPrepRouteImport } from './routes/_authenticated/admin.interview-prep'
+import { Route as AuthenticatedAdminInterviewPrepRouteImport } from './routes/_authenticated/admin_.interview-prep'
 import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
 import { Route as AuthenticatedCodingIdRouteImport } from './routes/_authenticated/coding.$id'
 import { Route as AuthenticatedCommunicationIndexRouteImport } from './routes/_authenticated/communication.index'
@@ -96,9 +96,9 @@ const AuthenticatedTestsRoute = AuthenticatedTestsRouteImport.update({
 } as any)
 const AuthenticatedAdminInterviewPrepRoute =
   AuthenticatedAdminInterviewPrepRouteImport.update({
-    id: '/interview-prep',
-    path: '/interview-prep',
-    getParentRoute: () => AuthenticatedAdminRoute,
+    id: '/admin_/interview-prep',
+    path: '/admin/interview-prep',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedCodingIndexRoute =
   AuthenticatedCodingIndexRouteImport.update({
@@ -169,7 +169,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/interview': typeof AuthenticatedInterviewRoute
@@ -194,7 +194,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/interview': typeof AuthenticatedInterviewRoute
@@ -221,7 +221,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/aptitude': typeof AuthenticatedAptitudeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/interview': typeof AuthenticatedInterviewRoute
@@ -229,7 +229,7 @@ export interface FileRoutesById {
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tests': typeof AuthenticatedTestsRoute
-  '/_authenticated/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
+  '/_authenticated/admin_/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
   '/_authenticated/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
@@ -307,7 +307,7 @@ export interface FileRouteTypes {
     | '/_authenticated/onboarding'
     | '/_authenticated/teacher'
     | '/_authenticated/tests'
-    | '/_authenticated/admin/interview-prep'
+    | '/_authenticated/admin_/interview-prep'
     | '/_authenticated/coding/$id'
     | '/_authenticated/communication/$id'
     | '/_authenticated/companies/$slug'
@@ -414,12 +414,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTestsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/interview-prep': {
-      id: '/_authenticated/admin/interview-prep'
-      path: '/interview-prep'
+    '/_authenticated/admin_/interview-prep': {
+      id: '/_authenticated/admin_/interview-prep'
+      path: '/admin/interview-prep'
       fullPath: '/admin/interview-prep'
       preLoaderRoute: typeof AuthenticatedAdminInterviewPrepRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/coding/': {
       id: '/_authenticated/coding/'
@@ -501,19 +501,8 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminInterviewPrepRoute: typeof AuthenticatedAdminInterviewPrepRoute
-}
-
-const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminInterviewPrepRoute: AuthenticatedAdminInterviewPrepRoute,
-}
-
-const AuthenticatedAdminRouteWithChildren =
-  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
-
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAptitudeRoute: typeof AuthenticatedAptitudeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedInterviewRoute: typeof AuthenticatedInterviewRoute
@@ -521,6 +510,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
+  AuthenticatedAdminInterviewPrepRoute: typeof AuthenticatedAdminInterviewPrepRoute
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
   AuthenticatedCompaniesSlugRoute: typeof AuthenticatedCompaniesSlugRoute
@@ -535,7 +525,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAptitudeRoute: AuthenticatedAptitudeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedInterviewRoute: AuthenticatedInterviewRoute,
@@ -543,6 +533,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTestsRoute: AuthenticatedTestsRoute,
+  AuthenticatedAdminInterviewPrepRoute: AuthenticatedAdminInterviewPrepRoute,
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
   AuthenticatedCompaniesSlugRoute: AuthenticatedCompaniesSlugRoute,

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -24,6 +24,7 @@ function Admin() {
   return (
     <div>
       <PageHeader title="Admin / Trainer" subtitle="Manage the question bank, schedule tests and track students." />
+      <Link to="/admin/interview-prep" className="mb-4 inline-block"><Button variant="outline" size="sm">Manage company interview questions (CSV upload)</Button></Link>
       <Tabs defaultValue="questions">
         <TabsList><TabsTrigger value="questions">Questions</TabsTrigger><TabsTrigger value="tests">Tests</TabsTrigger><TabsTrigger value="students">Students</TabsTrigger></TabsList>
         <TabsContent value="questions"><Questions /></TabsContent>
