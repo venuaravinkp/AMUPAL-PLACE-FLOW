@@ -16,6 +16,7 @@ const NAV = [
   { to: "/communication", label: "Communication", icon: MessageSquare },
   { to: "/interview", label: "Interview", icon: Mic },
   { to: "/tests", label: "Tests", icon: ClipboardList },
+  { to: "/review", label: "Mistake Review", icon: ClipboardList },
   { to: "/companies", label: "Companies", icon: Building2 },
   { to: "/interview-prep", label: "Interview Prep", icon: Briefcase },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
