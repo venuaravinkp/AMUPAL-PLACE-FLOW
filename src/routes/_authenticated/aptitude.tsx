@@ -8,6 +8,7 @@ import { useMe, startAttempt, CATEGORY_LABEL } from "@/lib/data";
 import { GlassCard, PageHeader } from "@/components/glass";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LESSONS as FULL_LESSONS } from "@/lib/lessons";
 
 export const Route = createFileRoute("/_authenticated/aptitude")({
   head: () => ({ meta: [{ title: "Aptitude — AMUPAL PLACE FLOW" }, { name: "description", content: "Quant, logical, verbal and data interpretation practice." }, { property: "og:title", content: "Aptitude — AMUPAL PLACE FLOW" }, { property: "og:description", content: "Topic-wise aptitude practice with explanations." }] }),
@@ -55,11 +56,11 @@ function Aptitude() {
         <div className="solid-panel p-6 lg:col-span-1">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold"><BookOpen className="h-5 w-5 text-primary" />Lesson: {LESSONS[cat].title}</h2>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">{LESSONS[cat].points.map((p) => <li key={p}>{p}</li>)}</ul>
-          {cat === "quant" && (
-            <Link to="/learn/$slug" params={{ slug: "percentages" }} className="mt-4 block rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">
-              Full lesson: Percentages → learn, examples, hints & quiz
+          {FULL_LESSONS.filter((l) => l.category === cat).map((l) => (
+            <Link key={l.slug} to="/learn/$slug" params={{ slug: l.slug }} className="mt-3 block rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">
+              Full lesson: {l.title} → examples, hints & quiz
             </Link>
-          )}
+          ))}
           <div className="mt-6">
             <div className="mb-2 text-sm font-semibold">Difficulty</div>
             <div className="flex flex-wrap gap-2">
