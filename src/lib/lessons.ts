@@ -175,6 +175,79 @@ export const LESSONS: Lesson[] = [
       { q: "10, 9, 7, 4, ?", options: ["0", "1", "2", "−1"], answer: 0, explanation: "Subtract 1, 2, 3, 4 → 0." },
     ],
   },
+  {
+    slug: "subject-verb-agreement",
+    title: "Subject–Verb Agreement",
+    category: "verbal",
+    passPercent: 60,
+    intro: "Error-spotting and sentence-correction questions in TCS, Infosys and Wipro tests most often check whether the verb matches its subject. A few clear rules cover almost all of them.",
+    concepts: [
+      { heading: "Singular subject → singular verb", body: "He plays. The team is ready. A singular subject takes the verb with -s in present tense." },
+      { heading: "Each, every, either, neither", body: "These are singular: 'Each of the students has a laptop', not 'have'." },
+      { heading: "Ignore the words in between", body: "'The box of chocolates is on the table.' The subject is 'box', not 'chocolates'." },
+      { heading: "Either/or, neither/nor", body: "The verb agrees with the nearer subject: 'Neither the manager nor the employees were present.'" },
+    ],
+    formulas: [
+      "Find the real subject first, then the verb",
+      "each / every / everyone / either / neither → singular",
+      "A and B (joined by 'and') → plural",
+      "Either A or B → verb matches B",
+      "'The number of' → singular; 'A number of' → plural",
+    ],
+    examples: [
+      { problem: "Spot the error: 'One of my friends live in Chennai.'", steps: ["Real subject: 'One'", "'One' is singular", "So 'lives', not 'live'"], answer: "One of my friends lives in Chennai." },
+      { problem: "'The number of applicants (has / have) increased.'", steps: ["'The number of' is singular"], answer: "has" },
+      { problem: "'Ravi and Priya (is / are) coming.'", steps: ["Two subjects joined by 'and'", "Plural"], answer: "are" },
+    ],
+    guided: [
+      { q: "Everyone ___ invited to the party.", options: ["are", "is", "were", "have"], answer: 1, hint: "'Everyone' is singular.", explanation: "Everyone is." },
+      { q: "A number of students ___ absent.", options: ["was", "were", "is", "has"], answer: 1, hint: "'A number of' means many.", explanation: "Plural → were." },
+      { q: "Neither the teacher nor the students ___ ready.", options: ["was", "were", "is", "has"], answer: 1, hint: "Look at the nearer subject.", explanation: "'students' is nearer → were." },
+    ],
+    quiz: [
+      { q: "The list of items ___ on the desk.", options: ["are", "is", "were", "have been"], answer: 1, explanation: "Subject is 'list' → is." },
+      { q: "Each of the players ___ a medal.", options: ["get", "gets", "are getting", "have got"], answer: 1, explanation: "'Each' is singular → gets." },
+      { q: "Bread and butter ___ my favourite breakfast.", options: ["are", "is", "were", "have"], answer: 1, explanation: "Treated as one dish → is." },
+      { q: "Either the students or the teacher ___ responsible.", options: ["are", "is", "were", "have"], answer: 1, explanation: "Nearer subject 'teacher' → is." },
+      { q: "The news ___ very good today.", options: ["are", "is", "were", "have"], answer: 1, explanation: "'News' is uncountable, singular → is." },
+    ],
+  },
+  {
+    slug: "pie-charts",
+    title: "Pie Charts & Percent Share",
+    category: "di",
+    passPercent: 60,
+    intro: "Data interpretation sets show a chart and ask 3–5 questions on it. Pie charts are the most common: they show how a total is split into parts.",
+    concepts: [
+      { heading: "Degrees to percent", body: "A full circle is 360°. A slice of 90° is 90/360 = 25% of the total." },
+      { heading: "Percent to value", body: "If the total budget is ₹40 lakh and Marketing is 15%, Marketing = 40 × 0.15 = ₹6 lakh." },
+      { heading: "Comparing slices", body: "To compare two slices you don't need the total: if A is 30% and B is 20%, A is 50% more than B." },
+      { heading: "Approximate first", body: "Options are usually far apart. Round numbers and check which option is closest before exact calculation." },
+    ],
+    formulas: [
+      "Percent = degrees / 360 × 100",
+      "Degrees = percent × 3.6",
+      "Value = total × percent / 100",
+      "A is more than B by (A − B) / B × 100 %",
+    ],
+    examples: [
+      { problem: "A slice is 72°. What percent is it?", steps: ["72 / 360 = 0.2", "0.2 × 100 = 20"], answer: "20%" },
+      { problem: "Total sales 5,000 units; Product X is 18%. Units of X?", steps: ["5,000 × 18/100 = 900"], answer: "900 units" },
+      { problem: "Rent is 25%, Food 35%. Food is how much more than Rent?", steps: ["(35 − 25)/25 × 100", "= 40"], answer: "40% more" },
+    ],
+    guided: [
+      { q: "A slice of 54° is what percent?", options: ["12%", "15%", "18%", "20%"], answer: 1, hint: "Divide by 360.", explanation: "54/360 = 0.15 = 15%." },
+      { q: "30% of a pie chart is how many degrees?", options: ["90°", "108°", "120°", "100°"], answer: 1, hint: "Multiply by 3.6.", explanation: "30 × 3.6 = 108°." },
+      { q: "Total ₹80,000; Travel is 12.5%. Travel amount?", options: ["₹8,000", "₹10,000", "₹12,500", "₹9,600"], answer: 1, hint: "12.5% = 1/8.", explanation: "80,000 ÷ 8 = ₹10,000." },
+    ],
+    quiz: [
+      { q: "A slice is 126°. Percent?", options: ["30%", "35%", "36%", "40%"], answer: 1, explanation: "126/360 = 0.35." },
+      { q: "45% in degrees?", options: ["145°", "162°", "150°", "170°"], answer: 1, explanation: "45 × 3.6 = 162°." },
+      { q: "Total 1,200 students; 15% chose Civil. How many?", options: ["160", "180", "200", "150"], answer: 1, explanation: "1,200 × 0.15 = 180." },
+      { q: "A = 24%, B = 16%. A is more than B by:", options: ["8%", "50%", "33%", "40%"], answer: 1, explanation: "(24 − 16)/16 = 50%." },
+      { q: "If Food = ₹9,000 and is 30% of the total, the total is:", options: ["₹27,000", "₹30,000", "₹32,000", "₹36,000"], answer: 1, explanation: "9,000 / 0.3 = ₹30,000." },
+    ],
+  },
 ];
 
 export function getLesson(slug: string) {
