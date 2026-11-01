@@ -477,6 +477,45 @@ export type Database = {
           },
         ]
       }
+      student_projects: {
+        Row: {
+          completed_milestones: string[]
+          demo_url: string
+          id: string
+          notes: string
+          project_slug: string
+          repository_url: string
+          status: string
+          summary: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_milestones?: string[]
+          demo_url?: string
+          id?: string
+          notes?: string
+          project_slug: string
+          repository_url?: string
+          status?: string
+          summary?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          completed_milestones?: string[]
+          demo_url?: string
+          id?: string
+          notes?: string
+          project_slug?: string
+          repository_url?: string
+          status?: string
+          summary?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       test_attempts: {
         Row: {
           accuracy: number | null
