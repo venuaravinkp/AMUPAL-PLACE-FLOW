@@ -33,6 +33,8 @@ import { Route as AuthenticatedCompaniesSlugRouteImport } from './routes/_authen
 import { Route as AuthenticatedInterviewPrepIndexRouteImport } from './routes/_authenticated/interview-prep.index'
 import { Route as AuthenticatedInterviewPrepIdRouteImport } from './routes/_authenticated/interview-prep.$id'
 import { Route as AuthenticatedLearnSlugRouteImport } from './routes/_authenticated/learn.$slug'
+import { Route as AuthenticatedProjectsIndexRouteImport } from './routes/_authenticated/projects.index'
+import { Route as AuthenticatedProjectsSlugRouteImport } from './routes/_authenticated/projects.$slug'
 import { Route as AuthenticatedResultsAttemptIdRouteImport } from './routes/_authenticated/results.$attemptId'
 import { Route as AuthenticatedTestAttemptIdRouteImport } from './routes/_authenticated/test.$attemptId'
 
@@ -164,6 +166,18 @@ const AuthenticatedLearnSlugRoute = AuthenticatedLearnSlugRouteImport.update({
   path: '/learn/$slug',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProjectsIndexRoute =
+  AuthenticatedProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProjectsSlugRoute =
+  AuthenticatedProjectsSlugRouteImport.update({
+    id: '/projects/$slug',
+    path: '/projects/$slug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedResultsAttemptIdRoute =
   AuthenticatedResultsAttemptIdRouteImport.update({
     id: '/results/$attemptId',
@@ -197,12 +211,14 @@ export interface FileRoutesByFullPath {
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
   '/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/projects/$slug': typeof AuthenticatedProjectsSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding/': typeof AuthenticatedCodingIndexRoute
   '/communication/': typeof AuthenticatedCommunicationIndexRoute
   '/companies/': typeof AuthenticatedCompaniesIndexRoute
   '/interview-prep/': typeof AuthenticatedInterviewPrepIndexRoute
+  '/projects/': typeof AuthenticatedProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -224,12 +240,14 @@ export interface FileRoutesByTo {
   '/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
   '/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/projects/$slug': typeof AuthenticatedProjectsSlugRoute
   '/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/coding': typeof AuthenticatedCodingIndexRoute
   '/communication': typeof AuthenticatedCommunicationIndexRoute
   '/companies': typeof AuthenticatedCompaniesIndexRoute
   '/interview-prep': typeof AuthenticatedInterviewPrepIndexRoute
+  '/projects': typeof AuthenticatedProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -253,12 +271,14 @@ export interface FileRoutesById {
   '/_authenticated/companies/$slug': typeof AuthenticatedCompaniesSlugRoute
   '/_authenticated/interview-prep/$id': typeof AuthenticatedInterviewPrepIdRoute
   '/_authenticated/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/_authenticated/projects/$slug': typeof AuthenticatedProjectsSlugRoute
   '/_authenticated/results/$attemptId': typeof AuthenticatedResultsAttemptIdRoute
   '/_authenticated/test/$attemptId': typeof AuthenticatedTestAttemptIdRoute
   '/_authenticated/coding/': typeof AuthenticatedCodingIndexRoute
   '/_authenticated/communication/': typeof AuthenticatedCommunicationIndexRoute
   '/_authenticated/companies/': typeof AuthenticatedCompaniesIndexRoute
   '/_authenticated/interview-prep/': typeof AuthenticatedInterviewPrepIndexRoute
+  '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -282,12 +302,14 @@ export interface FileRouteTypes {
     | '/companies/$slug'
     | '/interview-prep/$id'
     | '/learn/$slug'
+    | '/projects/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding/'
     | '/communication/'
     | '/companies/'
     | '/interview-prep/'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -309,12 +331,14 @@ export interface FileRouteTypes {
     | '/companies/$slug'
     | '/interview-prep/$id'
     | '/learn/$slug'
+    | '/projects/$slug'
     | '/results/$attemptId'
     | '/test/$attemptId'
     | '/coding'
     | '/communication'
     | '/companies'
     | '/interview-prep'
+    | '/projects'
   id:
     | '__root__'
     | '/'
@@ -337,12 +361,14 @@ export interface FileRouteTypes {
     | '/_authenticated/companies/$slug'
     | '/_authenticated/interview-prep/$id'
     | '/_authenticated/learn/$slug'
+    | '/_authenticated/projects/$slug'
     | '/_authenticated/results/$attemptId'
     | '/_authenticated/test/$attemptId'
     | '/_authenticated/coding/'
     | '/_authenticated/communication/'
     | '/_authenticated/companies/'
     | '/_authenticated/interview-prep/'
+    | '/_authenticated/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -522,6 +548,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLearnSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/projects/': {
+      id: '/_authenticated/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof AuthenticatedProjectsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/projects/$slug': {
+      id: '/_authenticated/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof AuthenticatedProjectsSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/results/$attemptId': {
       id: '/_authenticated/results/$attemptId'
       path: '/results/$attemptId'
@@ -556,12 +596,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCompaniesSlugRoute: typeof AuthenticatedCompaniesSlugRoute
   AuthenticatedInterviewPrepIdRoute: typeof AuthenticatedInterviewPrepIdRoute
   AuthenticatedLearnSlugRoute: typeof AuthenticatedLearnSlugRoute
+  AuthenticatedProjectsSlugRoute: typeof AuthenticatedProjectsSlugRoute
   AuthenticatedResultsAttemptIdRoute: typeof AuthenticatedResultsAttemptIdRoute
   AuthenticatedTestAttemptIdRoute: typeof AuthenticatedTestAttemptIdRoute
   AuthenticatedCodingIndexRoute: typeof AuthenticatedCodingIndexRoute
   AuthenticatedCommunicationIndexRoute: typeof AuthenticatedCommunicationIndexRoute
   AuthenticatedCompaniesIndexRoute: typeof AuthenticatedCompaniesIndexRoute
   AuthenticatedInterviewPrepIndexRoute: typeof AuthenticatedInterviewPrepIndexRoute
+  AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -581,12 +623,14 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCompaniesSlugRoute: AuthenticatedCompaniesSlugRoute,
   AuthenticatedInterviewPrepIdRoute: AuthenticatedInterviewPrepIdRoute,
   AuthenticatedLearnSlugRoute: AuthenticatedLearnSlugRoute,
+  AuthenticatedProjectsSlugRoute: AuthenticatedProjectsSlugRoute,
   AuthenticatedResultsAttemptIdRoute: AuthenticatedResultsAttemptIdRoute,
   AuthenticatedTestAttemptIdRoute: AuthenticatedTestAttemptIdRoute,
   AuthenticatedCodingIndexRoute: AuthenticatedCodingIndexRoute,
   AuthenticatedCommunicationIndexRoute: AuthenticatedCommunicationIndexRoute,
   AuthenticatedCompaniesIndexRoute: AuthenticatedCompaniesIndexRoute,
   AuthenticatedInterviewPrepIndexRoute: AuthenticatedInterviewPrepIndexRoute,
+  AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
