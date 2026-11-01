@@ -125,6 +125,11 @@ function Dashboard() {
         </GlassCard>
       </Link>
 
+      <section className="flex flex-wrap items-center justify-between gap-4 border-y border-border py-5">
+        <div><h2 className="text-xl font-bold">Real-World Projects</h2><p className="mt-1 text-sm text-muted-foreground">Software, engineering and business project briefs.</p></div>
+        <Button asChild><Link to="/projects">Projects & Portfolio</Link></Button>
+      </section>
+
       <div className="grid gap-4 lg:grid-cols-3">
         <GlassCard>
           <h3 className="mb-4 text-lg font-bold">Skill progress</h3>

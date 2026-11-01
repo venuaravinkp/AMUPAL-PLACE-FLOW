@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route,
+  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route, FolderKanban,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/lib/data";
@@ -19,6 +19,7 @@ const NAV = [
   { to: "/review", label: "Mistake Review", icon: ClipboardList },
   { to: "/companies", label: "Companies", icon: Building2 },
   { to: "/interview-prep", label: "Interview Prep", icon: Briefcase },
+  { to: "/projects", label: "Projects & Portfolio", icon: FolderKanban },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ] as const;
 
@@ -42,7 +43,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             AMUPAL <span className="text-primary">PLACE FLOW</span>
           </div>
         </Link>
-        <nav className="flex flex-1 flex-col gap-1">
+        <nav className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
           {NAV.map((n) => (
             <Link
               key={n.to}
