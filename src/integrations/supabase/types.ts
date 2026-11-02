@@ -516,6 +516,108 @@ export type Database = {
         }
         Relationships: []
       }
+      student_resumes: {
+        Row: {
+          document: Json
+          job_description: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          document?: Json
+          job_description?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          document?: Json
+          job_description?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_resumes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_plans: {
+        Row: {
+          daily_minutes: number
+          drive_date: string | null
+          drive_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          daily_minutes?: number
+          drive_date?: string | null
+          drive_name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          daily_minutes?: number
+          drive_date?: string | null
+          drive_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_plans_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_tasks: {
+        Row: {
+          category: string
+          completed: boolean
+          created_at: string
+          due_date: string
+          id: string
+          minutes: number
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          completed?: boolean
+          created_at?: string
+          due_date: string
+          id?: string
+          minutes?: number
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          completed?: boolean
+          created_at?: string
+          due_date?: string
+          id?: string
+          minutes?: number
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_tasks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       test_attempts: {
         Row: {
           accuracy: number | null

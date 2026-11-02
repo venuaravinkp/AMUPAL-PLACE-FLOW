@@ -11,3 +11,6 @@
 
 - Real-world project briefs live in a shared typed catalog; private progress and portfolio submissions use authenticated server functions with owner-only RLS, so the same briefs and validation serve every student surface without exposing student work.
 - Project pages load saved work through shared TanStack Query options in protected loaders; submission validation also runs server-side so completion cannot be bypassed by editing browser state.
+- Resume and planner data use authenticated server functions, shared query options and owner-only RLS; shared client-safe validation and deterministic scoring keep private career records isolated and estimates reproducible.
+- Career resources are a department-tagged educational catalog; grade calculators accept explicit institutional conversion inputs because university grading rules vary.
+- Resume export uses a token-themed print-only document and browser PDF printing so personal data never goes to a third-party renderer.

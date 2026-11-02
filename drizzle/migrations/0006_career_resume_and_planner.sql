@@ -1,0 +1,16 @@
+CREATE TABLE public.student_resumes (user_id uuid PRIMARY KEY REFERENCES public.profiles(id) ON DELETE CASCADE, document jsonb NOT NULL DEFAULT '{}'::jsonb, job_description text NOT NULL DEFAULT '', updated_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.student_resumes TO authenticated;
+GRANT ALL ON public.student_resumes TO service_role;
+ALTER TABLE public.student_resumes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Own resumes" ON public.student_resumes FOR ALL TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE TABLE public.study_plans (user_id uuid PRIMARY KEY REFERENCES public.profiles(id) ON DELETE CASCADE, drive_name text NOT NULL DEFAULT '', drive_date date, daily_minutes integer NOT NULL DEFAULT 60 CHECK (daily_minutes BETWEEN 15 AND 240), updated_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.study_plans TO authenticated;
+GRANT ALL ON public.study_plans TO service_role;
+ALTER TABLE public.study_plans ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Own plans" ON public.study_plans FOR ALL TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE TABLE public.study_tasks (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE, title text NOT NULL CHECK (char_length(title) BETWEEN 1 AND 200), category text NOT NULL CHECK (category IN ('aptitude','coding','communication','interview','projects','resume','core')), due_date date NOT NULL, minutes integer NOT NULL DEFAULT 30 CHECK (minutes BETWEEN 5 AND 240), completed boolean NOT NULL DEFAULT false, created_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.study_tasks TO authenticated;
+GRANT ALL ON public.study_tasks TO service_role;
+ALTER TABLE public.study_tasks ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Own tasks" ON public.study_tasks FOR ALL TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE INDEX study_tasks_owner_date ON public.study_tasks(user_id, due_date);

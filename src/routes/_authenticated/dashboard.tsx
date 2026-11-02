@@ -8,7 +8,7 @@ import { GlassCard, ProgressRing } from "@/components/glass";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — AMUPAL PLACE FLOW" }, { name: "description", content: "Your readiness score, daily mission and progress." }, { property: "og:title", content: "Dashboard — AMUPAL PLACE FLOW" }, { property: "og:description", content: "Your daily placement mission." }] }),
+  head: () => ({ meta: [{ title: "Dashboard — AMUPAL PLACE FLOW" }, { name: "description", content: "Your readiness score, daily mission and progress." }, { property: "og:title", content: "Dashboard — AMUPAL PLACE FLOW" }, { property: "og:description", content: "Your daily placement mission." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Dashboard,
 });
 
@@ -128,6 +128,11 @@ function Dashboard() {
       <section className="flex flex-wrap items-center justify-between gap-4 border-y border-border py-5">
         <div><h2 className="text-xl font-bold">Real-World Projects</h2><p className="mt-1 text-sm text-muted-foreground">Software, engineering and business project briefs.</p></div>
         <Button asChild><Link to="/projects">Projects & Portfolio</Link></Button>
+      </section>
+
+      <section className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
+        <h2 className="text-xl font-bold">Career Tools</h2>
+        <div className="flex flex-wrap gap-2"><Button asChild variant="outline"><Link to="/resume">Resume Coach</Link></Button><Button asChild variant="outline"><Link to="/study-planner">Study Planner</Link></Button><Button asChild variant="outline"><Link to="/resources">Resources & Tools</Link></Button></div>
       </section>
 
       <div className="grid gap-4 lg:grid-cols-3">

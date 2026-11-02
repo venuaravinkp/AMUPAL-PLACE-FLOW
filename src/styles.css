@@ -100,6 +100,9 @@
   --gradient-primary: linear-gradient(135deg, oklch(0.74 0.2 50), oklch(0.66 0.23 30));
   --shadow-glow: 0 10px 40px -10px oklch(0.72 0.2 45 / 55%);
   --shadow-glass: 0 20px 50px -20px oklch(0 0 0 / 60%);
+  --resume-paper: oklch(1 0 0);
+  --resume-ink: oklch(0.18 0 0);
+  --resume-line: oklch(0.75 0 0);
 }
 
 @layer base {
@@ -163,4 +166,22 @@
 
 @utility animate-blob {
   animation: blob 22s ease-in-out infinite;
+}
+
+.resume-paper { background: var(--resume-paper); color: var(--resume-ink); max-width: 210mm; margin: 0 auto; padding: 32px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; }
+.resume-paper h1 { font-family: Arial, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0; }
+.resume-paper h2 { font-family: Arial, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0; border-bottom: 1px solid var(--resume-line); margin-bottom: 8px; }
+.resume-paper section { margin-top: 20px; }
+.resume-role { font-weight: 700; }
+.resume-compact { font-size: 12px; line-height: 1.45; }
+.resume-compact section { margin-top: 14px; }
+.resume-hidden { display: none; }
+@media (max-width: 640px) { .resume-paper { padding: 20px; } }
+@media print {
+  @page { size: A4; margin: 15mm; }
+  body { background: var(--resume-paper); color: var(--resume-ink); }
+  aside, body header, body nav, .resume-controls { display: none !important; }
+  main { padding: 0 !important; margin: 0 !important; }
+  .resume-paper, .resume-hidden { display: block !important; width: 100%; max-width: none; padding: 0; margin: 0; }
+  .resume-paper section h2 { break-after: avoid; }
 }
