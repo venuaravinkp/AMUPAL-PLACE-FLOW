@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route, FolderKanban,
+  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route, FolderKanban, FileText, CalendarDays, BookOpen,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/lib/data";
@@ -20,6 +20,9 @@ const NAV = [
   { to: "/companies", label: "Companies", icon: Building2 },
   { to: "/interview-prep", label: "Interview Prep", icon: Briefcase },
   { to: "/projects", label: "Projects & Portfolio", icon: FolderKanban },
+  { to: "/resume", label: "Resume Coach", icon: FileText },
+  { to: "/study-planner", label: "Study Planner", icon: CalendarDays },
+  { to: "/resources", label: "Resources & Tools", icon: BookOpen },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ] as const;
 
