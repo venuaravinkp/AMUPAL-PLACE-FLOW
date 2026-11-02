@@ -43,6 +43,13 @@
       "when": 1793538327632,
       "tag": "0005_student_project_portfolio",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793621172476,
+      "tag": "0006_career_resume_and_planner",
+      "breakpoints": true
     }
   ]
 }
