@@ -20,6 +20,7 @@ import { Route as AuthenticatedInterviewRouteImport } from './routes/_authentica
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedMyPathRouteImport } from './routes/_authenticated/my-path'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedResourcesRouteImport } from './routes/_authenticated/resources'
 import { Route as AuthenticatedResumeRouteImport } from './routes/_authenticated/resume'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedStudyPlannerRouteImport } from './routes/_authenticated/study-planner'
@@ -93,6 +94,11 @@ const AuthenticatedMyPathRoute = AuthenticatedMyPathRouteImport.update({
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedResourcesRoute = AuthenticatedResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedResumeRoute = AuthenticatedResumeRouteImport.update({
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/my-path': typeof AuthenticatedMyPathRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/resources': typeof AuthenticatedResourcesRoute
   '/resume': typeof AuthenticatedResumeRoute
   '/review': typeof AuthenticatedReviewRoute
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
@@ -246,6 +253,7 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/my-path': typeof AuthenticatedMyPathRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/resources': typeof AuthenticatedResourcesRoute
   '/resume': typeof AuthenticatedResumeRoute
   '/review': typeof AuthenticatedReviewRoute
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
@@ -279,6 +287,7 @@ export interface FileRoutesById {
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/my-path': typeof AuthenticatedMyPathRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/resources': typeof AuthenticatedResourcesRoute
   '/_authenticated/resume': typeof AuthenticatedResumeRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/study-planner': typeof AuthenticatedStudyPlannerRoute
@@ -312,6 +321,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/my-path'
     | '/onboarding'
+    | '/resources'
     | '/resume'
     | '/review'
     | '/study-planner'
@@ -343,6 +353,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/my-path'
     | '/onboarding'
+    | '/resources'
     | '/resume'
     | '/review'
     | '/study-planner'
@@ -375,6 +386,7 @@ export interface FileRouteTypes {
     | '/_authenticated/leaderboard'
     | '/_authenticated/my-path'
     | '/_authenticated/onboarding'
+    | '/_authenticated/resources'
     | '/_authenticated/resume'
     | '/_authenticated/review'
     | '/_authenticated/study-planner'
@@ -480,6 +492,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resources': {
+      id: '/_authenticated/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof AuthenticatedResourcesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/resume': {
@@ -626,6 +645,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedMyPathRoute: typeof AuthenticatedMyPathRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedResourcesRoute: typeof AuthenticatedResourcesRoute
   AuthenticatedResumeRoute: typeof AuthenticatedResumeRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedStudyPlannerRoute: typeof AuthenticatedStudyPlannerRoute
@@ -655,6 +675,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedMyPathRoute: AuthenticatedMyPathRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedResourcesRoute: AuthenticatedResourcesRoute,
   AuthenticatedResumeRoute: AuthenticatedResumeRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedStudyPlannerRoute: AuthenticatedStudyPlannerRoute,
