@@ -20,7 +20,9 @@ import { Route as AuthenticatedInterviewRouteImport } from './routes/_authentica
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedMyPathRouteImport } from './routes/_authenticated/my-path'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedResumeRouteImport } from './routes/_authenticated/resume'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
+import { Route as AuthenticatedStudyPlannerRouteImport } from './routes/_authenticated/study-planner'
 import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
 import { Route as AuthenticatedAdminInterviewPrepRouteImport } from './routes/_authenticated/admin_.interview-prep'
@@ -93,11 +95,22 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedResumeRoute = AuthenticatedResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
   id: '/review',
   path: '/review',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStudyPlannerRoute =
+  AuthenticatedStudyPlannerRouteImport.update({
+    id: '/study-planner',
+    path: '/study-planner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTeacherRoute = AuthenticatedTeacherRouteImport.update({
   id: '/teacher',
   path: '/teacher',
@@ -202,7 +215,9 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/my-path': typeof AuthenticatedMyPathRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/resume': typeof AuthenticatedResumeRoute
   '/review': typeof AuthenticatedReviewRoute
+  '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
@@ -231,7 +246,9 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/my-path': typeof AuthenticatedMyPathRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/resume': typeof AuthenticatedResumeRoute
   '/review': typeof AuthenticatedReviewRoute
+  '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
@@ -262,7 +279,9 @@ export interface FileRoutesById {
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/my-path': typeof AuthenticatedMyPathRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/resume': typeof AuthenticatedResumeRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
+  '/_authenticated/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tests': typeof AuthenticatedTestsRoute
   '/_authenticated/admin_/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
@@ -293,7 +312,9 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/my-path'
     | '/onboarding'
+    | '/resume'
     | '/review'
+    | '/study-planner'
     | '/teacher'
     | '/tests'
     | '/admin/interview-prep'
@@ -322,7 +343,9 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/my-path'
     | '/onboarding'
+    | '/resume'
     | '/review'
+    | '/study-planner'
     | '/teacher'
     | '/tests'
     | '/admin/interview-prep'
@@ -352,7 +375,9 @@ export interface FileRouteTypes {
     | '/_authenticated/leaderboard'
     | '/_authenticated/my-path'
     | '/_authenticated/onboarding'
+    | '/_authenticated/resume'
     | '/_authenticated/review'
+    | '/_authenticated/study-planner'
     | '/_authenticated/teacher'
     | '/_authenticated/tests'
     | '/_authenticated/admin_/interview-prep'
@@ -457,11 +482,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/resume': {
+      id: '/_authenticated/resume'
+      path: '/resume'
+      fullPath: '/resume'
+      preLoaderRoute: typeof AuthenticatedResumeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/review': {
       id: '/_authenticated/review'
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof AuthenticatedReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/study-planner': {
+      id: '/_authenticated/study-planner'
+      path: '/study-planner'
+      fullPath: '/study-planner'
+      preLoaderRoute: typeof AuthenticatedStudyPlannerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/teacher': {
@@ -587,7 +626,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedMyPathRoute: typeof AuthenticatedMyPathRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedResumeRoute: typeof AuthenticatedResumeRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
+  AuthenticatedStudyPlannerRoute: typeof AuthenticatedStudyPlannerRoute
   AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
   AuthenticatedAdminInterviewPrepRoute: typeof AuthenticatedAdminInterviewPrepRoute
@@ -614,7 +655,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedMyPathRoute: AuthenticatedMyPathRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedResumeRoute: AuthenticatedResumeRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
+  AuthenticatedStudyPlannerRoute: AuthenticatedStudyPlannerRoute,
   AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTestsRoute: AuthenticatedTestsRoute,
   AuthenticatedAdminInterviewPrepRoute: AuthenticatedAdminInterviewPrepRoute,
