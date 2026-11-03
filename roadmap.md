@@ -3,10 +3,10 @@
 - [x] Stage 2 — Percentages lesson (intro → concepts → formulas → examples → guided practice → quiz, saved progress)
 - [x] Stage 3 — All-department onboarding + learning paths
 - [x] Stage 4 (Interview Prep, 6 full lessons, mistake review) — More lessons, question review, company prep
-- [ ] Stage 5 — Resume coach, study planner, projects, resources
+- [x] Stage 5 — Resume coach, study planner, projects, resources
   - [x] Real-world projects first — department catalog, milestones, saved submissions and portfolio
-  - [ ] Resume coach and ATS checker — completing saved builder, role/job matching and PDF printing
-  - [ ] Study planner and career resources — completing saved tasks, drive countdown and department guides
+  - [x] Resume coach and ATS checker — saved builder, role/job matching and PDF printing; save/reopen and print view verified
+  - [x] Study planner and career resources — saved tasks, drive countdown and department guides; task actions, downloads and calculators verified
 - [x] Stage 6 — Smart AI Teacher (8 modes, follow-ups, practice) + video section
 - [ ] YouTube videos — waiting on a YouTube Data API key (YOUTUBE_API_KEY)
 - [ ] Stage 7 — Certificates, trainer workflows, reports
