@@ -10,4 +10,6 @@
 - [x] Stage 6 — Smart AI Teacher (8 modes, follow-ups, practice) + video section
 - [ ] YouTube videos — waiting on a YouTube Data API key (YOUTUBE_API_KEY)
 - [ ] Stage 7 — Certificates, trainer workflows, reports
+  - [ ] Verified course eligibility, issued certificates and public verification
+  - [ ] Owner-controlled trainer access, assignments and progress reports
 - [ ] Stage 8 — Owner-only admin hardening + QA

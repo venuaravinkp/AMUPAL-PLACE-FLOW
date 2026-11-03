@@ -50,6 +50,13 @@
       "when": 1793621172476,
       "tag": "0006_career_resume_and_planner",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793708271217,
+      "tag": "0007_stage7_certificates_and_training",
+      "breakpoints": true
     }
   ]
 }

@@ -73,6 +73,47 @@ export type Database = {
           },
         ]
       }
+      certificate_courses: {
+        Row: {
+          active: boolean
+          created_at: string
+          final_test_id: string
+          id: string
+          pass_percent: number
+          required_lessons: string[]
+          skills: string[]
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          final_test_id: string
+          id?: string
+          pass_percent?: number
+          required_lessons: string[]
+          skills: string[]
+          title: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          final_test_id?: string
+          id?: string
+          pass_percent?: number
+          required_lessons?: string[]
+          skills?: string[]
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificate_courses_final_test_id_fkey"
+            columns: ["final_test_id"]
+            isOneToOne: false
+            referencedRelation: "tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       companies: {
         Row: {
           category: string
@@ -176,6 +217,53 @@ export type Database = {
           sort?: number
         }
         Relationships: []
+      }
+      issued_certificates: {
+        Row: {
+          assessment_percent: number
+          course_id: string
+          course_title: string
+          id: string
+          issued_at: string
+          revocation_reason: string | null
+          revoked_at: string | null
+          skills: string[]
+          student_name: string
+          user_id: string
+        }
+        Insert: {
+          assessment_percent: number
+          course_id: string
+          course_title: string
+          id?: string
+          issued_at?: string
+          revocation_reason?: string | null
+          revoked_at?: string | null
+          skills: string[]
+          student_name: string
+          user_id: string
+        }
+        Update: {
+          assessment_percent?: number
+          course_id?: string
+          course_title?: string
+          id?: string
+          issued_at?: string
+          revocation_reason?: string | null
+          revoked_at?: string | null
+          skills?: string[]
+          student_name?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "issued_certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "certificate_courses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lesson_progress: {
         Row: {
@@ -725,6 +813,90 @@ export type Database = {
         }
         Relationships: []
       }
+      trainer_permissions: {
+        Row: {
+          assignments: boolean
+          granted_by: string
+          reports: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assignments?: boolean
+          granted_by: string
+          reports?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assignments?: boolean
+          granted_by?: string
+          reports?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      training_assignments: {
+        Row: {
+          completed: boolean
+          created_at: string
+          due_date: string
+          id: string
+          notes: string
+          student_id: string
+          title: string
+          trainer_id: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          due_date: string
+          id?: string
+          notes?: string
+          student_id: string
+          title: string
+          trainer_id: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          due_date?: string
+          id?: string
+          notes?: string
+          student_id?: string
+          title?: string
+          trainer_id?: string
+        }
+        Relationships: []
+      }
+      training_audit: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          details: Json
+          id: string
+          target_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+        }
+        Relationships: []
+      }
       user_question_status: {
         Row: {
           bookmarked: boolean
@@ -775,6 +947,36 @@ export type Database = {
         }
         Relationships: []
       }
+      verified_lesson_results: {
+        Row: {
+          completed: boolean
+          id: string
+          lesson_slug: string
+          score: number
+          total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed: boolean
+          id?: string
+          lesson_slug: string
+          score: number
+          total: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          id?: string
+          lesson_slug?: string
+          score?: number
+          total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -798,6 +1000,10 @@ export type Database = {
           question_id: string
         }[]
       }
+      complete_training_assignment: {
+        Args: { _completed: boolean; _id: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -806,6 +1012,7 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      issue_course_certificate: { Args: { _course: string }; Returns: string }
       leaderboard: {
         Args: { _limit?: number }
         Returns: {
@@ -817,6 +1024,10 @@ export type Database = {
           user_id: string
         }[]
       }
+      manage_course_certificate: {
+        Args: { _id: string; _name: string; _reason: string }
+        Returns: undefined
+      }
       my_rank: { Args: never; Returns: number }
       record_activity: {
         Args: {
@@ -827,6 +1038,10 @@ export type Database = {
           _question: string
           _score: number
         }
+        Returns: undefined
+      }
+      set_trainer_access: {
+        Args: { _assignments: boolean; _reports: boolean; _target: string }
         Returns: undefined
       }
       staff_get_options: {
@@ -855,6 +1070,18 @@ export type Database = {
       submit_attempt: {
         Args: { _answers: Json; _attempt: string }
         Returns: Json
+      }
+      training_access: { Args: { _permission: string }; Returns: boolean }
+      verify_course_certificate: {
+        Args: { _id: string }
+        Returns: {
+          course_title: string
+          id: string
+          issued_at: string
+          revoked: boolean
+          skills: string[]
+          student_name: string
+        }[]
       }
     }
     Enums: {
