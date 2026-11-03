@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function LiquidBackground() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden print:hidden">
       <div className="animate-blob absolute -left-32 top-10 h-[28rem] w-[28rem] rounded-full bg-electric/25 blur-3xl" />
       <div
         className="animate-blob absolute right-[-8rem] top-1/3 h-[26rem] w-[26rem] rounded-full bg-violet/25 blur-3xl"
