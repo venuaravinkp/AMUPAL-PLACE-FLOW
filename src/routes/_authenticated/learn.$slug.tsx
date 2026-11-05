@@ -8,6 +8,9 @@ import { useMe } from "@/lib/data";
 import { getLesson, scoreQuiz, passed, type QuizQ } from "@/lib/lessons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useServerFn } from "@tanstack/react-start";
+import { useMutation } from "@tanstack/react-query";
+import { submitVerifiedQuiz } from "@/lib/training.functions";
 
 export const Route = createFileRoute("/_authenticated/learn/$slug")({
   head: () => ({ meta: [{ title: "Lesson — AMUPAL PLACE FLOW" }, { name: "description", content: "Learn step by step with examples, guided practice and a quiz." }, { property: "og:title", content: "Lesson — AMUPAL PLACE FLOW" }, { property: "og:description", content: "Step-by-step placement lessons." }] }),
@@ -55,11 +58,13 @@ function LessonPage() {
   const uid = me?.user.id;
   const { data: saved } = useQuery({
     queryKey: ["lesson", slug, uid], enabled: !!uid,
-    queryFn: async () => (await supabase.from("lesson_progress").select("*").eq("user_id", uid!).eq("lesson_slug", slug).maybeSingle()).data,
+    queryFn: async () => { if (!uid) return null; return (await supabase.from("lesson_progress").select("*").eq("user_id", uid).eq("lesson_slug", slug).maybeSingle()).data; },
   });
   const [step, setStep] = useState(0);
   const [picks, setPicks] = useState<(number | null)[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const submitVerified = useServerFn(submitVerifiedQuiz);
+  const verifiedMutation = useMutation({ mutationFn: (data: { slug: string; picks: number[] }) => submitVerified({ data }), onSuccess: () => qc.invalidateQueries({ queryKey: ["certificates"] }) });
   useEffect(() => { if (saved) setStep(Math.min(saved.step, STEPS.length - 1)); }, [saved]);
 
   if (!lesson) return <div className="text-muted-foreground">Lesson not found.</div>;
@@ -74,11 +79,13 @@ function LessonPage() {
   }
   function goto(n: number) { setStep(n); if (n > (saved?.step ?? 0)) save({ step: n }); window.scrollTo(0, 0); }
   async function submitQuiz() {
-    const score = scoreQuiz(lesson!.quiz, picks);
-    const ok = passed(score, lesson!.quiz.length, lesson!.passPercent);
-    setSubmitted(true);
-    await save({ step: STEPS.length - 1, quiz_score: score, quiz_total: lesson!.quiz.length, completed: ok || !!saved?.completed });
-    toast[ok ? "success" : "info"](ok ? `Lesson complete! ${score}/${lesson!.quiz.length}` : `${score}/${lesson!.quiz.length}. Review and try again — you need ${lesson!.passPercent}%.`);
+    if (!lesson) return;
+    try {
+      const result = await verifiedMutation.mutateAsync({ slug, picks: picks.map((p) => p ?? -1) });
+      setSubmitted(true);
+      await save({ step: STEPS.length - 1, quiz_score: result.score, quiz_total: result.total, completed: result.completed || !!saved?.completed });
+      toast[result.completed ? "success" : "info"](result.completed ? `Lesson complete! ${result.score}/${result.total}` : `${result.score}/${result.total}. Review and try again — you need ${lesson.passPercent}%.`);
+    } catch (e) { toast.error(e instanceof Error ? e.message : "Quiz could not be saved."); }
   }
 
   return (
@@ -113,7 +120,7 @@ function LessonPage() {
               {submitted && <p className="mt-3 text-sm">{picks[i] === q.answer ? <CheckCircle2 className="mr-1 inline h-4 w-4 text-success" /> : <XCircle className="mr-1 inline h-4 w-4 text-destructive" />}{q.explanation}</p>}
             </div>
           ))}
-          {!submitted ? <Button disabled={picks.filter((x) => x != null).length < lesson.quiz.length} onClick={submitQuiz} className="bg-gradient-primary w-full rounded-full font-bold">Submit quiz</Button>
+          {!submitted ? <Button disabled={verifiedMutation.isPending || picks.filter((x) => x != null).length < lesson.quiz.length} onClick={submitQuiz} className="bg-gradient-primary w-full rounded-full font-bold">{verifiedMutation.isPending ? "Saving…" : "Submit quiz"}</Button>
             : <Button variant="outline" onClick={() => { setPicks([]); setSubmitted(false); }} className="w-full rounded-full">Retry quiz</Button>}
         </>}
       </div>

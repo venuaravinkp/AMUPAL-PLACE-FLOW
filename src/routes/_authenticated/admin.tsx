@@ -20,7 +20,7 @@ const blankQ = { id: "", module: "aptitude", category: "quant", topic: "", compa
 
 function Admin() {
   const { data: me } = useMe();
-  if (me && !me.isStaff) return <p className="text-muted-foreground">You need an admin or trainer account to view this page.</p>;
+  if (!me?.roles.includes("admin")) return <p className="text-muted-foreground">Only owner accounts can manage questions and tests.</p>;
   return (
     <div>
       <PageHeader title="Admin / Trainer" subtitle="Manage the question bank, schedule tests and track students." />

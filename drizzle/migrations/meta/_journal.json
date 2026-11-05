@@ -57,6 +57,13 @@
       "when": 1793708271217,
       "tag": "0007_stage7_certificates_and_training",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793857306946,
+      "tag": "0008_stage7_report_access",
+      "breakpoints": true
     }
   ]
 }

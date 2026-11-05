@@ -15,6 +15,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAptitudeRouteImport } from './routes/_authenticated/aptitude'
+import { Route as AuthenticatedAssignmentsRouteImport } from './routes/_authenticated/assignments'
+import { Route as AuthenticatedCertificatesRouteImport } from './routes/_authenticated/certificates'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedInterviewRouteImport } from './routes/_authenticated/interview'
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
@@ -26,6 +28,8 @@ import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedStudyPlannerRouteImport } from './routes/_authenticated/study-planner'
 import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
+import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
+import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as AuthenticatedAdminInterviewPrepRouteImport } from './routes/_authenticated/admin_.interview-prep'
 import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
 import { Route as AuthenticatedCodingIdRouteImport } from './routes/_authenticated/coding.$id'
@@ -70,6 +74,18 @@ const AuthenticatedAptitudeRoute = AuthenticatedAptitudeRouteImport.update({
   path: '/aptitude',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAssignmentsRoute =
+  AuthenticatedAssignmentsRouteImport.update({
+    id: '/assignments',
+    path: '/assignments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCertificatesRoute =
+  AuthenticatedCertificatesRouteImport.update({
+    id: '/certificates',
+    path: '/certificates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -126,6 +142,16 @@ const AuthenticatedTestsRoute = AuthenticatedTestsRouteImport.update({
   id: '/tests',
   path: '/tests',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const VerifyIdRoute = VerifyIdRouteImport.update({
+  id: '/verify/$id',
+  path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminInterviewPrepRoute =
   AuthenticatedAdminInterviewPrepRouteImport.update({
@@ -216,6 +242,8 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/assignments': typeof AuthenticatedAssignmentsRoute
+  '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/interview': typeof AuthenticatedInterviewRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
@@ -227,6 +255,8 @@ export interface FileRoutesByFullPath {
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
+  '/training': typeof AuthenticatedTrainingRoute
+  '/verify/$id': typeof VerifyIdRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -248,6 +278,8 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/assignments': typeof AuthenticatedAssignmentsRoute
+  '/certificates': typeof AuthenticatedCertificatesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/interview': typeof AuthenticatedInterviewRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
@@ -259,6 +291,8 @@ export interface FileRoutesByTo {
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
+  '/training': typeof AuthenticatedTrainingRoute
+  '/verify/$id': typeof VerifyIdRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
   '/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -282,6 +316,8 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/aptitude': typeof AuthenticatedAptitudeRoute
+  '/_authenticated/assignments': typeof AuthenticatedAssignmentsRoute
+  '/_authenticated/certificates': typeof AuthenticatedCertificatesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/interview': typeof AuthenticatedInterviewRoute
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
@@ -293,6 +329,8 @@ export interface FileRoutesById {
   '/_authenticated/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tests': typeof AuthenticatedTestsRoute
+  '/_authenticated/training': typeof AuthenticatedTrainingRoute
+  '/verify/$id': typeof VerifyIdRoute
   '/_authenticated/admin_/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
   '/_authenticated/communication/$id': typeof AuthenticatedCommunicationIdRoute
@@ -316,6 +354,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/admin'
     | '/aptitude'
+    | '/assignments'
+    | '/certificates'
     | '/dashboard'
     | '/interview'
     | '/leaderboard'
@@ -327,6 +367,8 @@ export interface FileRouteTypes {
     | '/study-planner'
     | '/teacher'
     | '/tests'
+    | '/training'
+    | '/verify/$id'
     | '/admin/interview-prep'
     | '/coding/$id'
     | '/communication/$id'
@@ -348,6 +390,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/admin'
     | '/aptitude'
+    | '/assignments'
+    | '/certificates'
     | '/dashboard'
     | '/interview'
     | '/leaderboard'
@@ -359,6 +403,8 @@ export interface FileRouteTypes {
     | '/study-planner'
     | '/teacher'
     | '/tests'
+    | '/training'
+    | '/verify/$id'
     | '/admin/interview-prep'
     | '/coding/$id'
     | '/communication/$id'
@@ -381,6 +427,8 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/admin'
     | '/_authenticated/aptitude'
+    | '/_authenticated/assignments'
+    | '/_authenticated/certificates'
     | '/_authenticated/dashboard'
     | '/_authenticated/interview'
     | '/_authenticated/leaderboard'
@@ -392,6 +440,8 @@ export interface FileRouteTypes {
     | '/_authenticated/study-planner'
     | '/_authenticated/teacher'
     | '/_authenticated/tests'
+    | '/_authenticated/training'
+    | '/verify/$id'
     | '/_authenticated/admin_/interview-prep'
     | '/_authenticated/coding/$id'
     | '/_authenticated/communication/$id'
@@ -413,6 +463,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  VerifyIdRoute: typeof VerifyIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -457,6 +508,20 @@ declare module '@tanstack/react-router' {
       path: '/aptitude'
       fullPath: '/aptitude'
       preLoaderRoute: typeof AuthenticatedAptitudeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assignments': {
+      id: '/_authenticated/assignments'
+      path: '/assignments'
+      fullPath: '/assignments'
+      preLoaderRoute: typeof AuthenticatedAssignmentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/certificates': {
+      id: '/_authenticated/certificates'
+      path: '/certificates'
+      fullPath: '/certificates'
+      preLoaderRoute: typeof AuthenticatedCertificatesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -535,6 +600,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/tests'
       preLoaderRoute: typeof AuthenticatedTestsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/training': {
+      id: '/_authenticated/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof AuthenticatedTrainingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/verify/$id': {
+      id: '/verify/$id'
+      path: '/verify/$id'
+      fullPath: '/verify/$id'
+      preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin_/interview-prep': {
       id: '/_authenticated/admin_/interview-prep'
@@ -640,6 +719,8 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAptitudeRoute: typeof AuthenticatedAptitudeRoute
+  AuthenticatedAssignmentsRoute: typeof AuthenticatedAssignmentsRoute
+  AuthenticatedCertificatesRoute: typeof AuthenticatedCertificatesRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedInterviewRoute: typeof AuthenticatedInterviewRoute
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
@@ -651,6 +732,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedStudyPlannerRoute: typeof AuthenticatedStudyPlannerRoute
   AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
+  AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
   AuthenticatedAdminInterviewPrepRoute: typeof AuthenticatedAdminInterviewPrepRoute
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
@@ -670,6 +752,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAptitudeRoute: AuthenticatedAptitudeRoute,
+  AuthenticatedAssignmentsRoute: AuthenticatedAssignmentsRoute,
+  AuthenticatedCertificatesRoute: AuthenticatedCertificatesRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedInterviewRoute: AuthenticatedInterviewRoute,
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
@@ -681,6 +765,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedStudyPlannerRoute: AuthenticatedStudyPlannerRoute,
   AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTestsRoute: AuthenticatedTestsRoute,
+  AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
   AuthenticatedAdminInterviewPrepRoute: AuthenticatedAdminInterviewPrepRoute,
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
@@ -705,6 +790,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  VerifyIdRoute: VerifyIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
