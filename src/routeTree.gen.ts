@@ -28,6 +28,7 @@ import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedStudyPlannerRouteImport } from './routes/_authenticated/study-planner'
 import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTestsRouteImport } from './routes/_authenticated/tests'
+import { Route as AuthenticatedTrainingRouteImport } from './routes/_authenticated/training'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as AuthenticatedAdminInterviewPrepRouteImport } from './routes/_authenticated/admin_.interview-prep'
 import { Route as AuthenticatedCodingIndexRouteImport } from './routes/_authenticated/coding.index'
@@ -142,6 +143,11 @@ const AuthenticatedTestsRoute = AuthenticatedTestsRouteImport.update({
   path: '/tests',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
@@ -249,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
+  '/training': typeof AuthenticatedTrainingRoute
   '/verify/$id': typeof VerifyIdRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
@@ -284,6 +291,7 @@ export interface FileRoutesByTo {
   '/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/teacher': typeof AuthenticatedTeacherRoute
   '/tests': typeof AuthenticatedTestsRoute
+  '/training': typeof AuthenticatedTrainingRoute
   '/verify/$id': typeof VerifyIdRoute
   '/admin/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/coding/$id': typeof AuthenticatedCodingIdRoute
@@ -321,6 +329,7 @@ export interface FileRoutesById {
   '/_authenticated/study-planner': typeof AuthenticatedStudyPlannerRoute
   '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tests': typeof AuthenticatedTestsRoute
+  '/_authenticated/training': typeof AuthenticatedTrainingRoute
   '/verify/$id': typeof VerifyIdRoute
   '/_authenticated/admin_/interview-prep': typeof AuthenticatedAdminInterviewPrepRoute
   '/_authenticated/coding/$id': typeof AuthenticatedCodingIdRoute
@@ -358,6 +367,7 @@ export interface FileRouteTypes {
     | '/study-planner'
     | '/teacher'
     | '/tests'
+    | '/training'
     | '/verify/$id'
     | '/admin/interview-prep'
     | '/coding/$id'
@@ -393,6 +403,7 @@ export interface FileRouteTypes {
     | '/study-planner'
     | '/teacher'
     | '/tests'
+    | '/training'
     | '/verify/$id'
     | '/admin/interview-prep'
     | '/coding/$id'
@@ -429,6 +440,7 @@ export interface FileRouteTypes {
     | '/_authenticated/study-planner'
     | '/_authenticated/teacher'
     | '/_authenticated/tests'
+    | '/_authenticated/training'
     | '/verify/$id'
     | '/_authenticated/admin_/interview-prep'
     | '/_authenticated/coding/$id'
@@ -589,6 +601,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTestsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/training': {
+      id: '/_authenticated/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof AuthenticatedTrainingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/verify/$id': {
       id: '/verify/$id'
       path: '/verify/$id'
@@ -713,6 +732,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedStudyPlannerRoute: typeof AuthenticatedStudyPlannerRoute
   AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTestsRoute: typeof AuthenticatedTestsRoute
+  AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
   AuthenticatedAdminInterviewPrepRoute: typeof AuthenticatedAdminInterviewPrepRoute
   AuthenticatedCodingIdRoute: typeof AuthenticatedCodingIdRoute
   AuthenticatedCommunicationIdRoute: typeof AuthenticatedCommunicationIdRoute
@@ -745,6 +765,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedStudyPlannerRoute: AuthenticatedStudyPlannerRoute,
   AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTestsRoute: AuthenticatedTestsRoute,
+  AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
   AuthenticatedAdminInterviewPrepRoute: AuthenticatedAdminInterviewPrepRoute,
   AuthenticatedCodingIdRoute: AuthenticatedCodingIdRoute,
   AuthenticatedCommunicationIdRoute: AuthenticatedCommunicationIdRoute,
