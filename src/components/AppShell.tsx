@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route, FolderKanban, FileText, CalendarDays, BookOpen,
+  LayoutDashboard, Calculator, Code2, MessageSquare, Mic, ClipboardList, Building2, Trophy, Shield, LogOut, Flame, GraduationCap, Briefcase, Route, FolderKanban, FileText, CalendarDays, BookOpen, Award,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useMe } from "@/lib/data";
@@ -23,6 +23,8 @@ const NAV = [
   { to: "/resume", label: "Resume Coach", icon: FileText },
   { to: "/study-planner", label: "Study Planner", icon: CalendarDays },
   { to: "/resources", label: "Resources & Tools", icon: BookOpen },
+  { to: "/certificates", label: "Certificates", icon: Award },
+  { to: "/assignments", label: "Trainer assignments", icon: ClipboardList },
   { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
 ] as const;
 
@@ -58,7 +60,8 @@ export function AppShell({ children }: { children: ReactNode }) {
               {n.label}
             </Link>
           ))}
-          {me?.isStaff && (
+          {me?.isStaff && <Link to="/training" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted-foreground" activeProps={{ className: "!text-primary" }}><GraduationCap className="h-4 w-4" />Training centre</Link>}
+          {me?.roles.includes("admin") && (
             <Link
               to="/admin"
               className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition hover:bg-glass hover:text-foreground"
@@ -85,7 +88,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           AMUPAL <span className="text-primary">PLACE FLOW</span>
         </Link>
         <div className="flex items-center gap-3">
-          {me?.isStaff && <Link to="/admin" aria-label="Admin"><Shield className="h-5 w-5" /></Link>}
+          {me?.isStaff && <Link to="/training" aria-label="Training centre"><Shield className="h-5 w-5" /></Link>}
           <button onClick={signOut} aria-label="Sign out"><LogOut className="h-5 w-5" /></button>
         </div>
       </header>
