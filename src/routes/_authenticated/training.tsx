@@ -24,10 +24,10 @@ function Training() {
   const add = useServerFn(addAssignment), del = useServerFn(deleteAssignment), grant = useServerFn(grantTrainer), course = useServerFn(saveCourse), manage = useServerFn(manageCertificate);
   const refresh = () => { qc.invalidateQueries({ queryKey: ["training"] }); qc.invalidateQueries({ queryKey: ["certificates"] }); qc.invalidateQueries({ queryKey: ["assignments"] }); qc.invalidateQueries({ queryKey: ["me"] }); toast.success("Saved"); };
   const fail = (e: Error) => toast.error(e.message);
-  const addM = useMutation({ mutationFn: (data: Parameters<typeof addAssignment>[0]["data"]) => add({ data }), onSuccess: refresh, onError: fail });
+  const addM = useMutation({ mutationFn: (data: { student_id: string; title: string; notes: string; due_date: string }) => add({ data }), onSuccess: refresh, onError: fail });
   const delM = useMutation({ mutationFn: (id: string) => del({ data: { id } }), onSuccess: refresh, onError: fail });
   const grantM = useMutation({ mutationFn: (data: { id: string; reports: boolean; assignments: boolean }) => grant({ data }), onSuccess: refresh, onError: fail });
-  const courseM = useMutation({ mutationFn: (data: Parameters<typeof saveCourse>[0]["data"]) => course({ data }), onSuccess: refresh, onError: fail });
+  const courseM = useMutation({ mutationFn: (data: { id?: string; title: string; skills: string[]; required_lessons: string[]; final_test_id: string; pass_percent: number; active: boolean }) => course({ data }), onSuccess: refresh, onError: fail });
   const manageM = useMutation({ mutationFn: (data: { id: string; name: string | null; reason: string | null }) => manage({ data }), onSuccess: refresh, onError: fail });
   const [task, setTask] = useState({ student_id: "", title: "", notes: "", due_date: "" });
   const [target, setTarget] = useState(""), [reports, setReports] = useState(false), [assignments, setAssignments] = useState(false);

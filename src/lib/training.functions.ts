@@ -92,7 +92,12 @@ export const saveCourse = createServerFn({ method: "POST" }).middleware([require
   return { saved: true };
 });
 export const manageCertificate = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((v) => idSchema.extend({ name: z.string().trim().min(1).max(150).nullable(), reason: z.string().trim().min(1).max(500).nullable() }).parse(v)).handler(async ({ context, data }) => {
-  const { error } = await context.supabase.rpc("manage_course_certificate", { _id: data.id, _name: data.name ?? undefined, _reason: data.reason ?? undefined });
+  const { data: owner, error: roleError } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" });
+  if (roleError || !owner) throw new Error("Only owners can manage certificates.");
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  if (!data.name && !data.reason) throw new Error("Provide a correction or revocation reason.");
+  const { error } = await supabaseAdmin.from("issued_certificates").update(data.reason ? { revoked_at: new Date().toISOString(), revocation_reason: data.reason } : { student_name: data.name ?? "" }).eq("id", data.id).select().single();
   if (error) throw new Error(error.message);
+  await supabaseAdmin.from("training_audit").insert({ actor_id: context.userId, action: data.reason ? "certificate_revoked" : "certificate_corrected", details: { certificate_id: data.id } });
   return { saved: true };
 });

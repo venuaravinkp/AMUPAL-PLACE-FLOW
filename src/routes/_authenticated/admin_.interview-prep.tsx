@@ -26,7 +26,7 @@ function Page() {
   const [busy, setBusy] = useState(false);
   const { data: companies } = useQuery({ queryKey: ["prep-companies"], queryFn: async () => (await supabase.from("companies").select("*").order("name")).data ?? [] });
   const { data: questions } = useQuery({ queryKey: ["admin-prep-qs"], queryFn: async () => ((await supabase.from("company_questions").select("*").order("created_at", { ascending: false })).data ?? []) as Q[] });
-  if (me && !me.isStaff) return <p className="text-muted-foreground">You need an admin account to view this page.</p>;
+  if (!me?.roles.includes("admin")) return <p className="text-muted-foreground">Only owner accounts can manage interview questions.</p>;
   const name = (id: string) => companies?.find((c) => c.id === id)?.name ?? "—";
   const refresh = () => { qc.invalidateQueries({ queryKey: ["admin-prep-qs"] }); qc.invalidateQueries({ queryKey: ["prep-counts"] }); qc.invalidateQueries({ queryKey: ["prep-companies"] }); };
 
