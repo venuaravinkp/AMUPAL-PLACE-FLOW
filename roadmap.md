@@ -14,3 +14,7 @@
   - [ ] Verified course eligibility, issued certificates and public verification
   - [ ] Owner-controlled trainer access, assignments and progress reports
 - [ ] Stage 8 — Owner-only admin hardening + QA
+  - [ ] Verify certificate claim, public verification, reports and assignment save/reopen
+  - [ ] Audit and repair scoring, assessment access and private records
+  - [ ] Run regression tests and desktop/mobile route checks
+  - [ ] Review deep security scan results when available

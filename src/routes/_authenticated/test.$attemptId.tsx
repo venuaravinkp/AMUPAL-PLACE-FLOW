@@ -28,7 +28,8 @@ function TestRunner() {
         supabase.from("answer_options").select("id,question_id,label,position").in("question_id", a.question_ids).order("position"),
       ]);
       const order = new Map(a.question_ids.map((id, i) => [id, i]));
-      const questions = (qs.data ?? []).sort((x, y) => (order.get(x.id)! - order.get(y.id)!));
+      if (qs.error || opts.error) throw new Error("Test questions could not be loaded.");
+      const questions = (qs.data ?? []).sort((x, y) => ((order.get(x.id) ?? 0) - (order.get(y.id) ?? 0)));
       return { attempt: a, questions, options: opts.data ?? [] };
     },
   });
@@ -63,6 +64,7 @@ function TestRunner() {
 
   if (isLoading || !data) return <div className="text-muted-foreground">Loading test…</div>;
   const q = data.questions[idx];
+  if (!q) return <p className="text-muted-foreground">No questions are available for this test.</p>;
   const opts = data.options.filter((o) => o.question_id === q.id);
   const answered = Object.keys(answers).length;
 
